@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Career skills matcher</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <span class="eyebrow">Career exploration</span>
+      <h1>Find the skills that move with you.</h1>
+      <p>Compare where you are today with a career you are curious about. Get an encouraging starting point for the skills you already use, areas to develop, and next steps to explore.</p>
+    </header>
+    <section class="panel" aria-labelledby="matcher-title">
+      <h2 id="matcher-title">Compare two careers</h2>
+      <form id="matcher-form" novalidate>
+        <div class="form-grid">
+          <div>
+            <label for="current-title">Your current job title</label>
+            <input id="current-title" name="current-title" list="current-title-options" autocomplete="organization-title" placeholder="e.g. Customer Support Specialist" aria-describedby="current-title-error">
+            <datalist id="current-title-options"></datalist>
+            <span class="field-error" id="current-title-error" role="alert"></span>
+          </div>
+          <div>
+            <label for="target-career">Career you are interested in</label>
+            <select id="target-career" name="target-career" aria-describedby="target-career-error">
+              <option value="">Choose a career</option>
+            </select>
+            <span class="field-error" id="target-career-error" role="alert"></span>
+          </div>
+        </div>
+        <button type="submit">Show my transferable skills</button>
+      </form>
+    </section>
+    <section class="panel" id="results" aria-labelledby="results-title" hidden>
+      <div class="results-heading">
+        <span class="eyebrow">Your comparison</span>
+        <h2 id="results-title">A possible path</h2>
+        <p id="result-summary"></p>
+      </div>
+      <div class="result-grid">
+        <article class="result-card">
+          <h3>Skills you may already have</h3>
+          <ul id="transferable-skills"></ul>
+        </article>
+        <article class="result-card">
+          <h3>Skills to develop</h3>
+          <ul id="development-skills"></ul>
+        </article>
+        <article class="result-card">
+          <h3>Suggested next steps</h3>
+          <ul id="next-steps"></ul>
+        </article>
+      </div>
+      <p class="note">This comparison is a practical starting point based on the skills in this small curated dataset, not a prediction or a guarantee. Your experience may include many additional strengths.</p>
+    </section>
+  </main>
+  <script src="/data/careers.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,6 +1,8 @@
-# START
+# Career skills matcher
 
-A minimal Node.js starter repository using CommonJS and Node's built-in test runner.
+An accessible, dependency-free browser app that compares a user's current job
+title with a career they are exploring. It highlights overlapping skills,
+skills to develop, and practical next steps using a curated local dataset.
 
 ## Requirements
 
@@ -12,6 +14,8 @@ A minimal Node.js starter repository using CommonJS and Node's built-in test run
 npm install
 npm start
 ```
+
+Open <http://localhost:3000> in a browser.
 
 ## Development
 
@@ -25,14 +29,25 @@ npm run dev
 npm test
 ```
 
+## How it works
+
+Choose a supported current job title and an interested-in career. The matcher
+compares the skills in both curated profiles. It is guidance for exploration,
+not a prediction or guarantee, and does not send entered titles to an external
+service.
+
 ## Structure
 
 ```text
 START/
 ├── src/
-│   └── index.js
+│   ├── app.js
+│   ├── data/careers.js
+│   ├── index.html
+│   ├── server.js
+│   └── styles.css
 ├── test/
-│   └── index.test.js
+│   └── matcher.test.js
 ├── .editorconfig
 ├── .gitignore
 ├── LICENSE
