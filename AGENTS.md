@@ -11,6 +11,10 @@ different backgrounds and levels of career experience. The app should provide
 grounded pathway information without presenting predictions or recommendations
 as guarantees.
 
+The approved target users, problem statement, first-version outcome, and scope
+are documented in [`USERS.md`](USERS.md). Read it before making product,
+content, or user-flow decisions.
+
 ---
 
 ## 1. Core Workflow (Spec-Driven Development)
