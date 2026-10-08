@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Career Pathway Explorer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Career exploration</p>
+        <h1 id="page-title">Explore office-based careers</h1>
+        <p>
+          Answer a few simple questions about your experience, skills, and
+          preferences. Your answers will help you explore possible career
+          paths.
+        </p>
+        <p class="note">
+          There are no right or wrong answers, and your responses are not saved.
+        </p>
+      </section>
+
+      <form id="intake-form" class="intake-form" novalidate>
+        <fieldset>
+          <legend>1. Which activities have you done before?</legend>
+          <p class="question-help">Choose all that fit.</p>
+          <label>
+            <input type="checkbox" name="activities" value="helping-people" />
+            Helping customers, visitors, coworkers, or community members
+          </label>
+          <label>
+            <input type="checkbox" name="activities" value="communication" />
+            Answering phones, messages, or emails
+          </label>
+          <label>
+            <input type="checkbox" name="activities" value="organizing" />
+            Organizing files, information, supplies, or schedules
+          </label>
+          <label>
+            <input type="checkbox" name="activities" value="scheduling" />
+            Making appointments or planning activities
+          </label>
+          <label>
+            <input type="checkbox" name="activities" value="documents" />
+            Entering information or preparing documents
+          </label>
+          <label>
+            <input type="checkbox" name="activities" value="none" />
+            None of these yet
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>2. What type of communication feels most comfortable?</legend>
+          <label>
+            <input type="radio" name="communication" value="in-person" />
+            Greeting and helping people in person
+          </label>
+          <label>
+            <input type="radio" name="communication" value="phone" />
+            Talking with people by phone
+          </label>
+          <label>
+            <input type="radio" name="communication" value="writing" />
+            Writing emails, notes, or documents
+          </label>
+          <label>
+            <input type="radio" name="communication" value="problem-solving" />
+            Listening to questions and helping solve problems
+          </label>
+          <label>
+            <input type="radio" name="communication" value="learning" />
+            I am still building my communication skills
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>3. Which work tasks sound most satisfying?</legend>
+          <label>
+            <input type="radio" name="tasks" value="organizing" />
+            Keeping information organized and accurate
+          </label>
+          <label>
+            <input type="radio" name="tasks" value="scheduling" />
+            Managing calendars, appointments, or meetings
+          </label>
+          <label>
+            <input type="radio" name="tasks" value="welcoming" />
+            Welcoming visitors and helping them find the right person
+          </label>
+          <label>
+            <input type="radio" name="tasks" value="resolving" />
+            Answering questions and resolving problems
+          </label>
+          <label>
+            <input type="radio" name="tasks" value="healthcare" />
+            Supporting patients and organizing healthcare information
+          </label>
+          <label>
+            <input type="radio" name="tasks" value="variety" />
+            Completing a variety of general office tasks
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            4. How do you feel about learning workplace software and new
+            procedures?
+          </legend>
+          <label>
+            <input type="radio" name="software" value="enjoy" />
+            I enjoy learning new computer tools
+          </label>
+          <label>
+            <input type="radio" name="software" value="practice" />
+            I can learn with practice and support
+          </label>
+          <label>
+            <input type="radio" name="software" value="people-first" />
+            I prefer people-focused tasks but can use basic software
+          </label>
+          <label>
+            <input type="radio" name="software" value="experience" />
+            I have used scheduling, billing, office, or recordkeeping systems
+            before
+          </label>
+          <label>
+            <input type="radio" name="software" value="training" />
+            I would like training before using new systems independently
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>5. Which workplace would you prefer to explore?</legend>
+          <label>
+            <input type="radio" name="workplace" value="general-office" />
+            A general office with a variety of tasks
+          </label>
+          <label>
+            <input type="radio" name="workplace" value="team-support" />
+            A role supporting a manager or team with schedules and documents
+          </label>
+          <label>
+            <input type="radio" name="workplace" value="front-desk" />
+            A front desk where I welcome and guide people
+          </label>
+          <label>
+            <input type="radio" name="workplace" value="service" />
+            A service role where I answer questions and solve problems
+          </label>
+          <label>
+            <input type="radio" name="workplace" value="healthcare" />
+            A clinic, hospital, or other healthcare office
+          </label>
+          <label>
+            <input type="radio" name="workplace" value="unsure" />
+            I am not sure yet
+          </label>
+        </fieldset>
+
+        <button type="submit">Submit my answers</button>
+        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+      </form>
+    </main>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 # START
 
-A minimal Node.js starter repository using CommonJS and Node's built-in test runner.
+A beginner-friendly career exploration prototype using plain HTML, CSS, and
+JavaScript.
 
 ## Requirements
 
@@ -10,14 +11,12 @@ A minimal Node.js starter repository using CommonJS and Node's built-in test run
 
 ```bash
 npm install
-npm start
 ```
 
-## Development
+## Preview the website
 
-```bash
-npm run dev
-```
+Open `src/index.html` directly in a web browser. The prototype does not use a
+database, account system, or web server.
 
 ## Tests
 
@@ -30,7 +29,9 @@ npm test
 ```text
 START/
 ├── src/
-│   └── index.js
+│   ├── app.js
+│   ├── index.html
+│   └── styles.css
 ├── test/
 │   └── index.test.js
 ├── .editorconfig
@@ -39,3 +40,10 @@ START/
 ├── package.json
 └── README.md
 ```
+
+### File roles
+
+- `src/index.html` contains the welcome message and five intake questions.
+- `src/styles.css` controls the layout, colors, spacing, and focus styles.
+- `src/app.js` checks the answers and displays a confirmation message.
+- `test/index.test.js` contains the Node.js tests.
