@@ -34,6 +34,9 @@ START/
 │   ├── app.js
 │   ├── data/
 │   │   └── careers.js
+│   ├── assets/
+│   │   ├── office-hero.svg
+│   │   └── careers/
 │   ├── index.html
 │   └── styles.css
 ├── test/
@@ -51,6 +54,7 @@ START/
   recommendation results area.
 - `src/data/careers.js` contains the five career titles and their answer-match
   signals.
+- `src/assets/` contains the original office and career illustrations.
 - `src/styles.css` controls the layout, colors, spacing, and focus styles.
 - `src/app.js` checks the answers, ranks career matches, and displays reasons
   based on matching answers.

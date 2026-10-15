@@ -2,6 +2,7 @@ const careerRecords = [
   {
     id: "administrative-assistant",
     title: "Administrative assistant",
+    image: "assets/careers/administrative-assistant.svg",
     matchSignals: {
       activities: ["organizing", "scheduling", "documents"],
       communication: ["phone", "writing"],
@@ -13,6 +14,7 @@ const careerRecords = [
   {
     id: "receptionist",
     title: "Receptionist",
+    image: "assets/careers/receptionist.svg",
     matchSignals: {
       activities: ["helping-people", "communication"],
       communication: ["in-person", "phone"],
@@ -24,6 +26,7 @@ const careerRecords = [
   {
     id: "customer-service-representative",
     title: "Customer service representative",
+    image: "assets/careers/customer-service.svg",
     matchSignals: {
       activities: ["helping-people", "communication"],
       communication: ["phone", "problem-solving"],
@@ -35,6 +38,7 @@ const careerRecords = [
   {
     id: "medical-administrative-assistant",
     title: "Medical administrative assistant",
+    image: "assets/careers/medical-administrative-assistant.svg",
     matchSignals: {
       activities: ["helping-people", "organizing", "scheduling", "documents"],
       communication: ["in-person", "phone", "writing"],
@@ -46,6 +50,7 @@ const careerRecords = [
   {
     id: "records-clerk",
     title: "Records clerk",
+    image: "assets/careers/records-clerk.svg",
     matchSignals: {
       activities: ["organizing", "documents"],
       communication: ["writing"],

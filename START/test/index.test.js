@@ -1,7 +1,10 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
 const { main } = require("../src/index");
 const { getCareerMatches, getUnansweredQuestions } = require("../src/app");
+const careerOptions = require("../src/data/careers");
 
 test("main is exported as a function", () => {
   assert.equal(typeof main, "function");
@@ -88,4 +91,16 @@ test("multiple activity selections contribute at most one point", () => {
     "scheduling",
     "documents",
   ]);
+});
+
+test("each career has a local illustration file", () => {
+  assert.equal(careerOptions.length, 5);
+
+  for (const career of careerOptions) {
+    assert.match(career.image, /^assets\/careers\/.+\.svg$/);
+    assert.ok(
+      fs.existsSync(path.join(__dirname, "../src", career.image)),
+      `${career.title} illustration should exist`,
+    );
+  }
 });

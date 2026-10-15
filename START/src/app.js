@@ -104,11 +104,26 @@ function getMatchExplanation(form, matchedAnswers) {
 
 function renderRecommendations(form, matches) {
   const recommendationList = document.querySelector("#recommendation-list");
+  const stylesheet = document.querySelector('link[rel="stylesheet"]');
+
+  if (!stylesheet) {
+    throw new Error("Could not find the page stylesheet to resolve career images.");
+  }
+
   recommendationList.replaceChildren();
 
   for (const match of matches) {
     const item = document.createElement("li");
     item.className = "recommendation-card";
+
+    const image = document.createElement("img");
+    image.className = "recommendation-image";
+    image.src = new URL(match.career.image, stylesheet.href).href;
+    image.alt = "";
+    image.setAttribute("aria-hidden", "true");
+
+    const content = document.createElement("div");
+    content.className = "recommendation-content";
 
     const title = document.createElement("h3");
     title.textContent = match.career.title;
@@ -121,7 +136,8 @@ function renderRecommendations(form, matches) {
     explanation.className = "recommendation-reason";
     explanation.textContent = getMatchExplanation(form, match.matchedAnswers);
 
-    item.append(title, score, explanation);
+    content.append(title, score, explanation);
+    item.append(image, content);
     recommendationList.append(item);
   }
 
