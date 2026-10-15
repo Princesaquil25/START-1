@@ -3,190 +3,436 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore five administrative and office-based career paths using your existing experience, interests, and work preferences."
+    />
     <title>Career Pathway Explorer</title>
     <link rel="stylesheet" href="START/src/styles.css" />
     <script src="START/src/data/careers.js" defer></script>
     <script src="START/src/app.js" defer></script>
   </head>
   <body>
-    <main class="page-shell">
-      <section class="intro" aria-labelledby="page-title">
-        <div class="intro-copy">
-          <p class="eyebrow">Career exploration</p>
-          <h1 id="page-title">Explore office-based careers</h1>
-          <p>
-            Answer a few simple questions about your experience, skills, and
-            preferences. Your answers will help you explore possible career
-            paths.
-          </p>
-          <p class="note">
-            There are no right or wrong answers, and your responses are not saved.
-          </p>
+    <header class="site-header">
+      <nav class="site-nav page-shell" aria-label="Main navigation">
+        <a class="brand" href="#welcome">Career Pathway Explorer</a>
+        <div class="nav-links">
+          <a href="#how-it-works">How it works</a>
+          <a href="#questionnaire">Questionnaire</a>
+          <a href="#privacy">Privacy</a>
         </div>
-        <img
-          class="office-illustration"
-          src="START/src/assets/office-hero.svg"
-          alt=""
+      </nav>
+    </header>
+
+    <main class="page-shell">
+      <section id="welcome" class="intro" aria-labelledby="page-title">
+        <div class="intro-content">
+          <p class="eyebrow">Career exploration for adults</p>
+          <h1 id="page-title">
+            Discover where your transferable skills could take you.
+          </h1>
+          <p class="intro-lede">
+            Your experience may open doors to careers you haven’t considered.
+          </p>
+          <p class="intro-lede">
+            Career Pathway Explorer helps adults explore entry-level
+            administrative and office-based careers, including those with little
+            or no previous office experience or formal training in the field.
+          </p>
+          <section
+            class="career-detail-section intro-transferable-skills"
+            aria-labelledby="transferable-skills-title"
+          >
+            <h2 id="transferable-skills-title">
+              What are transferable skills?
+            </h2>
+            <p>
+              Transferable skills are abilities you’ve developed through
+              different experiences that can be valuable in other jobs or work
+              environments. For example, assisting customers can develop
+              communication and problem-solving skills, while organizing family
+              schedules, coordinating volunteer activities, or managing daily
+              responsibilities can strengthen planning and organizational
+              skills.
+            </p>
+            <p>
+              You don’t need previous office experience to have skills that may
+              be useful in an office-based career.
+            </p>
+          </section>
+          <a class="button-link" href="#questionnaire">Explore your options</a>
+        </div>
+        <svg
+          class="hero-art"
+          viewBox="0 0 420 360"
           aria-hidden="true"
-        />
+          focusable="false"
+        >
+          <defs>
+            <linearGradient id="hero-flow-blue" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#FFFFFF" stop-opacity=".92" />
+              <stop offset=".48" stop-color="#DCEAFF" stop-opacity=".9" />
+              <stop offset="1" stop-color="#3767C8" stop-opacity=".62" />
+            </linearGradient>
+            <linearGradient id="hero-flow-navy" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#3767C8" stop-opacity=".14" />
+              <stop offset=".55" stop-color="#172A4D" stop-opacity=".28" />
+              <stop offset="1" stop-color="#FFFFFF" stop-opacity=".76" />
+            </linearGradient>
+            <linearGradient id="hero-flow-light" x1="0" y1="0" x2="1" y2=".5">
+              <stop offset="0" stop-color="#FFFFFF" stop-opacity=".88" />
+              <stop offset="1" stop-color="#AFCBF4" stop-opacity=".48" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M80 28C151 3 227 38 268 91c36 46 69 60 118 54 19-2 31 19 21 35-39 64-118 108-204 105-82-3-153-47-174-113C8 115 29 54 80 28Z"
+            fill="url(#hero-flow-blue)"
+            opacity=".88"
+          />
+          <path
+            d="M35 194c48-38 106-46 157-22 44 20 70 60 113 68 38 7 69-14 100-39-10 65-65 117-136 133-78 17-159-11-198-67-16-23-29-51-36-73Z"
+            fill="url(#hero-flow-navy)"
+            opacity=".76"
+          />
+          <path
+            d="M109 35c34 34 52 76 47 119-5 44-34 83-77 111 61 12 119-4 155-43 34-36 44-87 22-131-24-47-79-75-147-56Z"
+            fill="url(#hero-flow-light)"
+            opacity=".76"
+          />
+          <path
+            d="M39 151c67-60 154-75 226-42 47 22 79 61 122 63"
+            fill="none"
+            stroke="#FFFFFF"
+            stroke-linecap="round"
+            stroke-opacity=".88"
+            stroke-width="3"
+          />
+          <path
+            d="M30 184c79-48 157-50 222-15 48 26 82 61 132 60"
+            fill="none"
+            stroke="#3767C8"
+            stroke-linecap="round"
+            stroke-opacity=".42"
+            stroke-width="2"
+          />
+          <path
+            d="M75 225c58-27 118-27 170 1 42 23 76 53 123 55"
+            fill="none"
+            stroke="#172A4D"
+            stroke-linecap="round"
+            stroke-opacity=".3"
+            stroke-width="2"
+          />
+          <circle cx="318" cy="78" r="5" fill="#FFFFFF" opacity=".9" />
+          <circle cx="355" cy="91" r="3" fill="#3767C8" opacity=".52" />
+        </svg>
       </section>
 
-      <form id="intake-form" class="intake-form" novalidate>
-        <fieldset>
-          <legend>1. Which activities have you done before?</legend>
-          <p class="question-help">Choose all that fit.</p>
-          <label>
-            <input type="checkbox" name="activities" value="helping-people" />
-            Helping customers, visitors, coworkers, or community members
-          </label>
-          <label>
-            <input type="checkbox" name="activities" value="communication" />
-            Answering phones, messages, or emails
-          </label>
-          <label>
-            <input type="checkbox" name="activities" value="organizing" />
-            Organizing files, information, supplies, or schedules
-          </label>
-          <label>
-            <input type="checkbox" name="activities" value="scheduling" />
-            Making appointments or planning activities
-          </label>
-          <label>
-            <input type="checkbox" name="activities" value="documents" />
-            Entering information or preparing documents
-          </label>
-          <label>
-            <input type="checkbox" name="activities" value="none" />
-            None of these yet
-          </label>
-        </fieldset>
+      <section
+        id="how-it-works"
+        class="content-section"
+        aria-labelledby="how-title"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">A simple process</p>
+          <h2 id="how-title">How it works</h2>
+        </div>
+        <ol class="how-list">
+          <li class="how-card">
+            <span class="step-number" aria-hidden="true">1</span>
+            <h3>Tell us about yourself</h3>
+            <p>
+              Answer five short questions about your experiences and
+              preferences. Explore how skills developed through work,
+              education, volunteering, and everyday responsibilities may
+              connect to new career opportunities.
+            </p>
+          </li>
+          <li class="how-card">
+            <span class="step-number" aria-hidden="true">2</span>
+            <h3>Explore your matches</h3>
+            <p>
+              Your answers help identify office-based careers that may align
+              with your transferable skills and work preferences.
+            </p>
+          </li>
+          <li class="how-card">
+            <span class="step-number" aria-hidden="true">3</span>
+            <h3>Discover possibilities</h3>
+            <p>
+              Review three suggestions with match explanations, career details,
+              optional learning resources, and practical next steps.
+            </p>
+          </li>
+        </ol>
+      </section>
 
-        <fieldset>
-          <legend>2. What type of communication feels most comfortable?</legend>
-          <label>
-            <input type="radio" name="communication" value="in-person" />
-            Greeting and helping people in person
-          </label>
-          <label>
-            <input type="radio" name="communication" value="phone" />
-            Talking with people by phone
-          </label>
-          <label>
-            <input type="radio" name="communication" value="writing" />
-            Writing emails, notes, or documents
-          </label>
-          <label>
-            <input type="radio" name="communication" value="problem-solving" />
-            Listening to questions and helping solve problems
-          </label>
-          <label>
-            <input type="radio" name="communication" value="learning" />
-            I am still building my communication skills
-          </label>
-        </fieldset>
+      <section
+        id="questionnaire"
+        class="content-section questionnaire-section"
+        aria-labelledby="questionnaire-title"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">Your experience matters</p>
+          <h2 id="questionnaire-title">A few questions to get started</h2>
+          <p>
+            Choose the answers that feel closest to you. There are no right or
+            wrong answers.
+          </p>
+        </div>
 
-        <fieldset>
-          <legend>3. Which work tasks sound most satisfying?</legend>
-          <label>
-            <input type="radio" name="tasks" value="organizing" />
-            Keeping information organized and accurate
-          </label>
-          <label>
-            <input type="radio" name="tasks" value="scheduling" />
-            Managing calendars, appointments, or meetings
-          </label>
-          <label>
-            <input type="radio" name="tasks" value="welcoming" />
-            Welcoming visitors and helping them find the right person
-          </label>
-          <label>
-            <input type="radio" name="tasks" value="resolving" />
-            Answering questions and resolving problems
-          </label>
-          <label>
-            <input type="radio" name="tasks" value="healthcare" />
-            Supporting patients and organizing healthcare information
-          </label>
-          <label>
-            <input type="radio" name="tasks" value="variety" />
-            Completing a variety of general office tasks
-          </label>
-        </fieldset>
+        <form id="intake-form" class="intake-form" novalidate>
+          <div class="progress-block">
+            <p id="progress-label" class="progress-label" role="status">
+              Question 1 of 5
+            </p>
+            <progress
+              id="question-progress"
+              max="5"
+              value="1"
+              aria-labelledby="progress-label"
+            >
+              Question 1 of 5
+            </progress>
+          </div>
 
-        <fieldset>
-          <legend>
-            4. How do you feel about learning workplace software and new
-            procedures?
-          </legend>
-          <label>
-            <input type="radio" name="software" value="enjoy" />
-            I enjoy learning new computer tools
-          </label>
-          <label>
-            <input type="radio" name="software" value="practice" />
-            I can learn with practice and support
-          </label>
-          <label>
-            <input type="radio" name="software" value="people-first" />
-            I prefer people-focused tasks but can use basic software
-          </label>
-          <label>
-            <input type="radio" name="software" value="experience" />
-            I have used scheduling, billing, office, or recordkeeping systems
-            before
-          </label>
-          <label>
-            <input type="radio" name="software" value="training" />
-            I would like training before using new systems independently
-          </label>
-        </fieldset>
+          <fieldset data-question-step>
+            <legend tabindex="-1">1. Which activities have you done before?</legend>
+            <p class="question-help">Choose all that fit.</p>
+            <label class="answer-option">
+              <input type="checkbox" name="activities" value="helping-people" />
+              <span>Helping customers, visitors, coworkers, or community members</span>
+            </label>
+            <label class="answer-option">
+              <input type="checkbox" name="activities" value="communication" />
+              <span>Answering phones, messages, or emails</span>
+            </label>
+            <label class="answer-option">
+              <input type="checkbox" name="activities" value="organizing" />
+              <span>Organizing files, information, supplies, or schedules</span>
+            </label>
+            <label class="answer-option">
+              <input type="checkbox" name="activities" value="scheduling" />
+              <span>Making appointments or planning activities</span>
+            </label>
+            <label class="answer-option">
+              <input type="checkbox" name="activities" value="documents" />
+              <span>Entering information or preparing documents</span>
+            </label>
+            <label class="answer-option">
+              <input type="checkbox" name="activities" value="none" />
+              <span>None of these yet</span>
+            </label>
+          </fieldset>
 
-        <fieldset>
-          <legend>5. Which workplace would you prefer to explore?</legend>
-          <label>
-            <input type="radio" name="workplace" value="general-office" />
-            A general office with a variety of tasks
-          </label>
-          <label>
-            <input type="radio" name="workplace" value="team-support" />
-            A role supporting a manager or team with schedules and documents
-          </label>
-          <label>
-            <input type="radio" name="workplace" value="front-desk" />
-            A front desk where I welcome and guide people
-          </label>
-          <label>
-            <input type="radio" name="workplace" value="service" />
-            A service role where I answer questions and solve problems
-          </label>
-          <label>
-            <input type="radio" name="workplace" value="healthcare" />
-            A clinic, hospital, or other healthcare office
-          </label>
-          <label>
-            <input type="radio" name="workplace" value="unsure" />
-            I am not sure yet
-          </label>
-        </fieldset>
+          <fieldset data-question-step>
+            <legend tabindex="-1">2. What type of communication feels most comfortable?</legend>
+            <label class="answer-option">
+              <input type="radio" name="communication" value="in-person" />
+              <span>Greeting and helping people in person</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="communication" value="phone" />
+              <span>Talking with people by phone</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="communication" value="writing" />
+              <span>Writing emails, notes, or documents</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="communication" value="problem-solving" />
+              <span>Listening to questions and helping solve problems</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="communication" value="learning" />
+              <span>I am still building my communication skills</span>
+            </label>
+          </fieldset>
 
-        <button type="submit">Submit my answers</button>
-        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
-      </form>
+          <fieldset data-question-step>
+            <legend tabindex="-1">3. Which work tasks sound most satisfying?</legend>
+            <label class="answer-option">
+              <input type="radio" name="tasks" value="organizing" />
+              <span>Keeping information organized and accurate</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="tasks" value="scheduling" />
+              <span>Managing calendars, appointments, or meetings</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="tasks" value="welcoming" />
+              <span>Welcoming visitors and helping them find the right person</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="tasks" value="resolving" />
+              <span>Answering questions and resolving problems</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="tasks" value="healthcare" />
+              <span>Supporting patients and organizing healthcare information</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="tasks" value="variety" />
+              <span>Completing a variety of general office tasks</span>
+            </label>
+          </fieldset>
+
+          <fieldset data-question-step>
+            <legend tabindex="-1">
+              4. How do you feel about learning workplace software and new
+              procedures?
+            </legend>
+            <label class="answer-option">
+              <input type="radio" name="software" value="enjoy" />
+              <span>I enjoy learning new computer tools</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="software" value="practice" />
+              <span>I can learn with practice and support</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="software" value="people-first" />
+              <span>I prefer people-focused tasks but can use basic software</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="software" value="experience" />
+              <span>
+                I have used scheduling, billing, office, or recordkeeping
+                systems before
+              </span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="software" value="training" />
+              <span>I would like training before using new systems independently</span>
+            </label>
+          </fieldset>
+
+          <fieldset data-question-step>
+            <legend tabindex="-1">5. Which workplace would you prefer to explore?</legend>
+            <label class="answer-option">
+              <input type="radio" name="workplace" value="general-office" />
+              <span>A general office with a variety of tasks</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="workplace" value="team-support" />
+              <span>A role supporting a manager or team with schedules and documents</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="workplace" value="front-desk" />
+              <span>A front desk where I welcome and guide people</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="workplace" value="service" />
+              <span>A service role where I answer questions and solve problems</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="workplace" value="healthcare" />
+              <span>A clinic, hospital, or other healthcare office</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="workplace" value="unsure" />
+              <span>I am not sure yet</span>
+            </label>
+          </fieldset>
+
+          <p
+            id="form-message"
+            class="form-message"
+            role="status"
+            aria-live="polite"
+          ></p>
+          <div class="question-actions">
+            <button id="question-back" class="button-secondary" type="button" disabled>
+              Back
+            </button>
+            <button id="question-next" type="button">Next</button>
+            <button id="submit-answers" type="submit" hidden>
+              See my three suggestions
+            </button>
+          </div>
+        </form>
+        <noscript>
+          <p class="noscript-note">
+            Enable JavaScript in your browser to use the guided questionnaire
+            and matching tool.
+          </p>
+        </noscript>
+      </section>
 
       <section
         id="recommendations"
-        class="recommendations"
+        class="content-section recommendations"
         aria-labelledby="recommendations-title"
-        aria-live="polite"
         hidden
       >
-        <h2 id="recommendations-title">Three options to explore</h2>
-        <p class="recommendation-note">
-          These suggestions are based on your preferences, not predictions or
-          guarantees. Use them as a starting point for further exploration.
-        </p>
+        <div class="section-heading">
+          <p class="eyebrow">A starting point for exploration</p>
+          <h2 id="recommendations-title" tabindex="-1">Three options to explore</h2>
+          <p>
+            These suggestions are based on your answers and are not predictions,
+            qualification checks, or guarantees of employment.
+          </p>
+        </div>
         <ol id="recommendation-list" class="recommendation-list"></ol>
+        <div class="result-actions">
+          <button id="change-answers" class="button-secondary" type="button">
+            Change my answers
+          </button>
+          <button id="start-over" class="button-secondary" type="button">
+            Start over
+          </button>
+        </div>
+      </section>
+
+      <section
+        id="privacy"
+        class="content-section privacy-section"
+        aria-labelledby="privacy-title"
+      >
+        <div class="section-heading">
+          <h2 id="privacy-title">About Your Results and Privacy</h2>
+        </div>
+        <div class="privacy-content">
+          <section aria-labelledby="privacy-details-title">
+            <h3 id="privacy-details-title">Your Privacy</h3>
+            <p>
+              Career Pathway Explorer does not ask for personal identifying,
+              health, or financial information. Your questionnaire answers are
+              processed locally in your browser and are not saved or transmitted
+              to a server. Your answers remain available until you restart,
+              refresh, or close the page. External resource websites do not
+              receive your questionnaire answers.
+            </p>
+          </section>
+          <section aria-labelledby="results-details-title">
+            <h3 id="results-details-title">Understanding Your Results</h3>
+            <p>
+              Career suggestions are based on matching rules developed for this
+              project, not a validated career assessment. They highlight
+              potential career opportunities based on your transferable skills
+              and preferences but do not guarantee employment or eligibility for
+              a particular position.
+            </p>
+            <p>
+              Job requirements vary, so review actual job postings and employer
+              qualifications before making career decisions. Learning resources
+              are optional unless an employer specifies otherwise.
+            </p>
+          </section>
+          <p class="source-note">
+            The Bureau of Labor Statistics and O*NET links support the
+            occupation descriptions, common duties, skills, and typical
+            education information. Resource providers describe their own
+            learning materials.
+          </p>
+        </div>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="page-shell">
+        <p>Career Pathway Explorer · Ideas to research, at your own pace.</p>
+      </div>
+    </footer>
   </body>
 </html>
