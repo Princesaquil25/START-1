@@ -15,8 +15,9 @@ steps.
 
 ## Application
 
-The current application lives in [`START/`](START/). See
-[`START/README.md`](START/README.md) for the available Node.js commands and
+The current application lives in [`START/`](START/). The repository-root
+[`index.html`](index.html) entry point serves the same app for GitHub Pages.
+See [`START/README.md`](START/README.md) for the available Node.js commands and
 project structure.
 
 The project uses Node.js 20 or newer. From the `START` directory:

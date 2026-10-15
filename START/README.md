@@ -1,7 +1,9 @@
 # START
 
 A beginner-friendly career exploration prototype using plain HTML, CSS, and
-JavaScript.
+JavaScript. After completing the questionnaire, users see three possible
+career titles matched to their selected preferences. The suggestions are
+exploration starting points, not predictions or guarantees.
 
 ## Requirements
 
@@ -30,6 +32,8 @@ npm test
 START/
 ├── src/
 │   ├── app.js
+│   ├── data/
+│   │   └── careers.js
 │   ├── index.html
 │   └── styles.css
 ├── test/
@@ -43,7 +47,11 @@ START/
 
 ### File roles
 
-- `src/index.html` contains the welcome message and five intake questions.
+- `src/index.html` contains the welcome message, five intake questions, and
+  recommendation results area.
+- `src/data/careers.js` contains the five career titles and their answer-match
+  signals.
 - `src/styles.css` controls the layout, colors, spacing, and focus styles.
-- `src/app.js` checks the answers and displays a confirmation message.
+- `src/app.js` checks the answers, ranks career matches, and displays reasons
+  based on matching answers.
 - `test/index.test.js` contains the Node.js tests.

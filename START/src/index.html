@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Career Pathway Explorer</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="data/careers.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -163,6 +164,21 @@
         <button type="submit">Submit my answers</button>
         <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
       </form>
+
+      <section
+        id="recommendations"
+        class="recommendations"
+        aria-labelledby="recommendations-title"
+        aria-live="polite"
+        hidden
+      >
+        <h2 id="recommendations-title">Three options to explore</h2>
+        <p class="recommendation-note">
+          These suggestions are based on your preferences, not predictions or
+          guarantees. Use them as a starting point for further exploration.
+        </p>
+        <ol id="recommendation-list" class="recommendation-list"></ol>
+      </section>
     </main>
   </body>
 </html>
