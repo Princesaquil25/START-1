@@ -107,3 +107,44 @@ Potential first-version ideas:
 7. Clearly label results as possibilities to explore rather than predictions,
    guarantees, or promises of employment.
 
+## Project timeline summary: Days 1–4
+
+This summary records the current project milestones in order. The earlier
+discovery and existing-tools research above is retained as background research.
+
+### Day 1: Define the project
+
+Define a beginner-friendly career exploration website for adults with work
+experience who want to move away from physically demanding or unstable jobs
+and explore administrative or office-based careers. The first version should
+help users recognize transferable skills, explore a small set of pathways,
+and choose one realistic next step. Career suggestions are possibilities to
+explore, not guarantees. No code was written on Day 1.
+
+### Day 2: Research careers
+
+Research five administrative and office-based careers:
+
+- General office clerk
+- Administrative assistant or secretary
+- Receptionist
+- Customer service representative
+- Medical secretary or medical administrative assistant
+
+For each career, identify common responsibilities, typical skills, education
+or training requirements, and transferable skills from other jobs. The
+research is U.S.-based and links to reliable career sources.
+
+### Day 3: Create intake questions
+
+Create five simple questions to help users describe their experience, skills,
+interests, and preferences. The questions cover past activities, comfortable
+communication styles, satisfying tasks, comfort with workplace software, and
+preferred workplace settings.
+
+### Day 4: Build the intake-form prototype
+
+Build a simple website prototype with a welcome message, the five intake
+questions, and a submit button. The form checks that each question has an
+answer and displays a confirmation. This prototype does not create accounts,
+save answers, or use a database.
