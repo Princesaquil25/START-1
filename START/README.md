@@ -1,10 +1,13 @@
 # Career Pathway Explorer
 
-A static, beginner-friendly website that helps adults explore five
-administrative and office-based career options. The questionnaire compares
-experience and work preferences with project-defined career signals and shows
-three options to research. Suggestions are exploratory, not predictions,
-qualification checks, or guarantees of employment.
+A static, beginner-friendly website that helps adults explore nine
+administrative and office-based career options. Its seven-question
+questionnaire connects selected work backgrounds and personally confirmed
+activities to potential transferable-skill matches, then uses technology,
+education, training, and work preferences to personalize preparation and
+refine fit. It shows up to three evidence-supported options. Suggestions are
+exploratory, not predictions, qualification checks, or guarantees of
+employment.
 
 ## Requirements
 
@@ -53,24 +56,39 @@ START/
 
 ### File roles
 
-- `src/index.html` contains the welcome section, five-question questionnaire,
+- `src/index.html` contains the welcome section, seven-question questionnaire,
   How It Works explanation, results area, and privacy information.
-- `src/data/careers.js` holds the five researched career profiles, learning
-  resources, occupational sources, and project-defined matching signals.
+- `src/data/careers.js` holds nine researched career profiles, learning
+  resources, occupational sources, and occupation/activity-to-skill mappings.
 - `src/styles.css` controls the blue-and-white responsive design, selected
   answer states, visible keyboard focus, and expandable detail cards.
 - `src/app.js` guides people through one question at a time, validates answers,
   ranks career matches, and renders personalized explanations and career
   details.
-- `test/index.test.js` tests required answers, scoring, tie handling, career
-  profile completeness, and visitor-facing explanations.
+- `test/index.test.js` tests question validation, skill evidence and
+  deduplication, career ranking, preparation personalization, profile
+  completeness, source links, and mirrored visitor pages.
 
 ## Understanding recommendations
 
-Each of the five question groups can contribute at most one point to a career.
-The app shows the top three by score; ties use the fixed order in
-`src/data/careers.js`. The score counts matched question groups. It is not a
-probability, qualification rating, or measure of job readiness.
+The matcher compares skill families suggested by selected occupations with
+the career profile, and gives stronger weight to activities a user confirms
+having done. Each skill family is counted once, even when multiple answers
+support it. Occupation-based connections are potential examples based on
+typical occupational tasks; they do not confirm that a particular person did
+those tasks. The app does not fill recommendation slots when it finds no
+relevant skill evidence.
+
+Broad “other work or unpaid responsibilities” selections, including
+homemaking, do not trigger assumed skills; personally confirmed activities
+still provide direct evidence. This also lets users confirm tasks such as
+tracking supplies rather than having the app infer that experience from a job
+title.
+
+Technology comfort, education/training, and training interest personalize
+preparation suggestions. Work-setting preferences and priorities refine
+career fit after transferable-skill evidence. These answers do not establish
+aptitude, qualifications, or eligibility.
 
 Career descriptions and common requirements link to the U.S. Bureau of Labor
 Statistics and O*NET where available. Learning resources are optional, and

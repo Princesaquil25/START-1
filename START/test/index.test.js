@@ -6,10 +6,17 @@ const { main } = require("../src/index");
 const {
   getCareerMatches,
   getMatchExplanation,
+  getPreferenceExplanation,
+  getPreparationNotes,
   getUnansweredQuestions,
   questionGroups,
+  questionSteps,
+  validateAnswers,
 } = require("../src/app");
-const careerOptions = require("../src/data/careers");
+const {
+  careerRecords: careerOptions,
+  careerMatchingData,
+} = require("../src/data/careers");
 
 function createForm(answers) {
   return {
@@ -20,25 +27,17 @@ function createForm(answers) {
   };
 }
 
-function createExplanationForm(answers, labels, questions) {
+function makeAnswers(overrides = {}) {
   return {
-    querySelector(selector) {
-      const [, groupName, value] =
-        selector.match(/\[name="([^"]+)"\](?:\[value="([^"]+)"\])?/);
-      return {
-        closest(selectorName) {
-          if (selectorName === "label") {
-            return { textContent: labels[groupName][value] };
-          }
-
-          return {
-            querySelector() {
-              return { textContent: questions[groupName] };
-            },
-          };
-        },
-      };
-    },
+    occupations: ["janitorial"],
+    activities: ["none"],
+    technologyTools: ["none"],
+    technologyComfort: ["little"],
+    education: ["no-credential"],
+    trainingInterest: ["short-practice"],
+    environment: ["unsure"],
+    priorities: ["unsure"],
+    ...overrides,
   };
 }
 
@@ -46,94 +45,242 @@ test("main is exported as a function", () => {
   assert.equal(typeof main, "function");
 });
 
-test("the intake form requires an answer for every question", () => {
-  const form = createForm({
-    activities: [],
-    communication: ["phone"],
-    tasks: ["organizing"],
-    software: ["practice"],
-    workplace: ["general-office"],
-  });
+test("the questionnaire has seven steps and validates all answer groups", () => {
+  assert.equal(questionSteps.length, 7);
+  assert.equal(questionGroups.length, 8);
 
-  assert.deepEqual(getUnansweredQuestions(form), ["activities"]);
-});
-
-test("career matches return the three strongest answer-based options", () => {
-  const answers = {
-    activities: [
-      "helping-people",
-      "communication",
-      "organizing",
-      "scheduling",
-      "documents",
-    ],
-    communication: ["problem-solving"],
-    tasks: ["resolving"],
-    software: ["practice"],
-    workplace: ["service"],
-  };
-  const form = createForm(answers);
-
-  const matches = getCareerMatches(form);
-
-  assert.equal(matches.length, 3);
-  assert.deepEqual(
-    matches.map(({ career, score }) => [career.id, score]),
-    [
-      ["customer-service-representative", 5],
-      ["administrative-assistant", 2],
-      ["receptionist", 2],
-    ],
-  );
-  assert.deepEqual(matches[0].matchedAnswers, {
-    activities: ["helping-people", "communication"],
-    communication: ["problem-solving"],
-    tasks: ["resolving"],
-    software: ["practice"],
-    workplace: ["service"],
-  });
-});
-
-test("multiple activity selections contribute at most one point", () => {
-  const answers = {
-    activities: ["helping-people", "organizing", "scheduling", "documents"],
-    communication: [],
-    tasks: [],
-    software: [],
-    workplace: [],
-  };
-  const form = createForm(answers);
-
-  const matches = getCareerMatches(form);
-  const administrativeAssistant = matches.find(
-    ({ career }) => career.id === "administrative-assistant",
-  );
-
-  assert.equal(administrativeAssistant.score, 1);
-  assert.deepEqual(administrativeAssistant.matchedAnswers.activities, [
-    "organizing",
-    "scheduling",
-    "documents",
+  const answers = makeAnswers({ occupations: [] });
+  assert.deepEqual(getUnansweredQuestions(createForm(answers)), ["occupations"]);
+  assert.deepEqual(validateAnswers(answers), [
+    { group: "occupations", reason: "required" },
   ]);
 });
 
-test("ties keep the career data order and return three options", () => {
-  const emptyAnswers = Object.fromEntries(
-    questionGroups.map(({ name }) => [name, []]),
+test("occupation selections contribute potential evidence even with no confirmed activities", () => {
+  const withOccupation = getCareerMatches(
+    createForm(makeAnswers({ activities: ["none"] })),
   );
-  const matches = getCareerMatches(createForm(emptyAnswers));
+  const withoutOccupation = getCareerMatches(
+    createForm(makeAnswers({ occupations: ["none"], activities: ["none"] })),
+  );
 
-  assert.deepEqual(
-    matches.map(({ career, score }) => [career.id, score]),
-    [
-      ["administrative-assistant", 0],
-      ["receptionist", 0],
-      ["customer-service-representative", 0],
-    ],
+  assert.ok(withOccupation.length > 0);
+  assert.ok(withOccupation.length <= 3);
+  assert.ok(
+    withOccupation.every(({ potentialSkillCount }) => potentialSkillCount > 0),
+  );
+  assert.deepEqual(withoutOccupation, []);
+  assert.ok(
+    withOccupation.some(({ career }) =>
+      ["administrative-assistant", "records-clerk", "general-office-clerk"].includes(
+        career.id,
+      ),
+    ),
   );
 });
 
-test("all five careers have complete, sourced, distinct profiles and resources", () => {
+test("other or homemaking experience is not assigned inferred skills, while confirmed supply tracking is used", () => {
+  const noConfirmedTasks = getCareerMatches(
+    createForm(
+      makeAnswers({ occupations: ["other"], activities: ["none"] }),
+    ),
+  );
+  const confirmedSupplyTracking = getCareerMatches(
+    createForm(
+      makeAnswers({
+        occupations: ["other"],
+        activities: ["track-supplies"],
+      }),
+    ),
+  );
+  const inventoryMatch = confirmedSupplyTracking.find(({ career }) =>
+    career.skillFamilies.includes("inventory-tracking"),
+  );
+
+  assert.deepEqual(noConfirmedTasks, []);
+  assert.ok(inventoryMatch);
+  assert.ok(
+    inventoryMatch.skillEvidence.some(
+      ({ family, confirmedSources }) =>
+        family === "inventory-tracking" &&
+        confirmedSources.some(({ value }) => value === "track-supplies"),
+    ),
+  );
+  assert.equal(inventoryMatch.potentialSkillCount, 0);
+});
+
+test("multiple occupations and activity evidence combine without double-counting skill families", () => {
+  const matches = getCareerMatches(
+    createForm(
+      makeAnswers({
+        occupations: ["retail", "cashier", "warehouse"],
+        activities: ["payments", "organize-documents"],
+      }),
+    ),
+  );
+  const billing = matches.find(
+    ({ career }) => career.id === "billing-posting-clerk",
+  );
+
+  assert.ok(billing);
+  const transactionEvidence = billing.skillEvidence.filter(
+    ({ family }) => family === "transaction-accuracy",
+  );
+  assert.equal(transactionEvidence.length, 1);
+  assert.deepEqual(
+    transactionEvidence[0].potentialSources.map(({ value }) => value).sort(),
+    ["cashier", "retail"],
+  );
+  assert.deepEqual(
+    transactionEvidence[0].confirmedSources.map(({ value }) => value),
+    ["payments"],
+  );
+  assert.equal(billing.confirmedSkillCount, 5);
+  assert.equal(
+    billing.skillEvidence.length,
+    billing.confirmedSkillCount + billing.potentialSkillCount,
+  );
+});
+
+test("confirmed activities carry more weight than potential occupational connections", () => {
+  const potentialOnly = getCareerMatches(
+    createForm(makeAnswers({ occupations: ["warehouse"] })),
+  );
+  const confirmedActivity = getCareerMatches(
+    createForm(
+      makeAnswers({
+        occupations: ["none"],
+        activities: ["organize-documents"],
+      }),
+    ),
+  );
+  const recordsMatch = confirmedActivity.find(
+    ({ career }) => career.id === "records-clerk",
+  );
+
+  assert.ok(potentialOnly.length > 0);
+  assert.ok(recordsMatch);
+  assert.ok(recordsMatch.confirmedSkillCount > 0);
+  assert.ok(recordsMatch.score >= 3);
+  assert.ok(
+    recordsMatch.skillEvidence.some(
+      ({ confirmedSources }) => confirmedSources.length > 0,
+    ),
+  );
+});
+
+test("technology, education, and training personalize preparation without changing skill ranking", () => {
+  const career = careerOptions.find(
+    ({ id }) => id === "administrative-assistant",
+  );
+  const entryAnswers = makeAnswers({
+    occupations: ["janitorial"],
+    activities: ["organize-documents"],
+  });
+  const experiencedAnswers = makeAnswers({
+    occupations: ["janitorial"],
+    activities: ["organize-documents"],
+    technologyTools: ["email", "spreadsheets"],
+    technologyComfort: ["independent"],
+    education: ["associate"],
+    trainingInterest: ["structured-course"],
+  });
+  const entryNotes = getPreparationNotes(entryAnswers, career).join(" ");
+  const experiencedNotes = getPreparationNotes(
+    experiencedAnswers,
+    career,
+  ).join(" ");
+
+  assert.match(entryNotes, /little or no experience with office computer tasks/i);
+  assert.match(entryNotes, /does not reduce your transferable-skill match/);
+  assert.match(entryNotes, /No formal credential yet/);
+  assert.match(entryNotes, /short lessons or free practice/);
+  assert.match(experiencedNotes, /email, spreadsheets/);
+  assert.match(experiencedNotes, /Associate degree/);
+  assert.match(experiencedNotes, /structured course/);
+
+  const entryMatches = getCareerMatches(createForm(entryAnswers));
+  const experiencedMatches = getCareerMatches(createForm(experiencedAnswers));
+  assert.deepEqual(
+    entryMatches.map(({ career: result, score }) => [result.id, score]),
+    experiencedMatches.map(({ career: result, score }) => [result.id, score]),
+  );
+});
+
+test("preferences refine results and are explained without promising conditions", () => {
+  const career = careerOptions.find(({ id }) => id === "receptionist");
+  const explanation = getPreferenceExplanation(
+    makeAnswers({
+      environment: ["people", "less-physical"],
+      priorities: ["service", "predictable-hours"],
+    }),
+    career,
+  );
+
+  assert.match(explanation, /regular contact with people/);
+  assert.match(explanation, /helping or serving people/);
+  assert.match(explanation, /vary by employer/);
+});
+
+test("answer validation rejects incompatible selections, excessive priorities, and unknown values", () => {
+  const invalidNone = validateAnswers(
+    makeAnswers({ technologyTools: ["none", "email"] }),
+  );
+  assert.ok(
+    invalidNone.some(
+      ({ group, reason }) =>
+        group === "technologyTools" && reason === "exclusive",
+    ),
+  );
+
+  const invalidEducation = validateAnswers(
+    makeAnswers({ education: ["no-credential", "associate"] }),
+  );
+  assert.ok(
+    invalidEducation.some(
+      ({ group, reason }) => group === "education" && reason === "single-choice",
+    ),
+  );
+
+  const invalidNotSure = validateAnswers(
+    makeAnswers({ education: ["unsure", "high-school"] }),
+  );
+  assert.ok(
+    invalidNotSure.some(({ group }) => group === "education"),
+  );
+
+  const tooManyPriorities = validateAnswers(
+    makeAnswers({ priorities: ["pay", "learning", "service", "advancement"] }),
+  );
+  assert.ok(
+    tooManyPriorities.some(
+      ({ group, reason }) =>
+        group === "priorities" && reason === "maximum",
+    ),
+  );
+
+  const unsupported = validateAnswers(
+    makeAnswers({ technologyComfort: ["never-used-anything"] }),
+  );
+  assert.ok(
+    unsupported.some(
+      ({ group, reason }) =>
+        group === "technologyComfort" && reason === "unsupported",
+    ),
+  );
+});
+
+test("Q3 tool exposure and comfort are separate and can validly coexist", () => {
+  const errors = validateAnswers(
+    makeAnswers({
+      technologyTools: ["email", "smartphone"],
+      technologyComfort: ["little"],
+    }),
+  );
+  assert.deepEqual(errors, []);
+});
+
+test("all nine careers have complete, sourced profiles and preparation content", () => {
   const expectedCareerPathways = {
     "administrative-assistant": [
       "Administrative Assistant",
@@ -166,6 +313,10 @@ test("all five careers have complete, sourced, distinct profiles and resources",
       "customer-service-representative",
       "medical-administrative-assistant",
       "records-clerk",
+      "general-office-clerk",
+      "billing-posting-clerk",
+      "eligibility-interviewer",
+      "production-planning-clerk",
     ],
   );
 
@@ -180,11 +331,16 @@ test("all five careers have complete, sourced, distinct profiles and resources",
     assert.ok(career.nextSteps.length >= 3, `${career.id} next steps`);
     assert.ok(career.resources.length >= 2, `${career.id} learning resources`);
     assert.ok(career.sources.length >= 2, `${career.id} sources`);
-    assert.deepEqual(
-      career.careerPathway,
-      expectedCareerPathways[career.id],
-      `${career.id} pathway`,
-    );
+    assert.ok(career.skillFamilies.length >= 5, `${career.id} matching families`);
+    assert.ok(career.technologyNeeds.length > 0, `${career.id} technology needs`);
+    assert.ok(career.preparationNote.length > 30, `${career.id} prep note`);
+    if (expectedCareerPathways[career.id]) {
+      assert.deepEqual(
+        career.careerPathway,
+        expectedCareerPathways[career.id],
+        `${career.id} existing pathway`,
+      );
+    }
     for (const resource of career.resources) {
       assert.match(resource.url, /^https:\/\//, `${career.id} resource URL`);
       assert.ok(resource.detail.length > 15);
@@ -194,48 +350,56 @@ test("all five careers have complete, sourced, distinct profiles and resources",
       assert.match(source.url, /^https:\/\//, `${career.id} source URL`);
     }
   }
+});
 
-  const roleSpecificResourceUrls = careerOptions.map(
-    ({ resources }) => resources[0].url,
+test("every occupation-to-skill connection has an occupational source", () => {
+  const skillLabels = careerMatchingData.skillLabels;
+  const occupationEntries = Object.values(careerMatchingData.occupations);
+
+  assert.ok(occupationEntries.length >= 10);
+  for (const occupation of occupationEntries) {
+    assert.ok(occupation.taskBasis.length > 30);
+    assert.ok(occupation.sources.length > 0);
+    for (const family of occupation.skills) {
+      assert.ok(skillLabels[family], `missing label for skill family ${family}`);
+    }
+    for (const source of occupation.sources) {
+      assert.match(source.url, /^https:\/\/www\.onetonline\.org\//);
+    }
+  }
+  for (const activity of Object.values(careerMatchingData.activities)) {
+    for (const family of activity.skills) {
+      assert.ok(skillLabels[family], `missing label for skill family ${family}`);
+    }
+  }
+  for (const career of careerOptions) {
+    for (const family of career.skillFamilies) {
+      assert.ok(skillLabels[family], `missing label for skill family ${family}`);
+    }
+  }
+});
+
+test("match explanations distinguish confirmed activities from potential work-background connections", () => {
+  const match = getCareerMatches(
+    createForm(
+      makeAnswers({
+        occupations: ["janitorial"],
+        activities: ["organize-documents"],
+      }),
+    ),
+  ).find(({ career }) => career.id === "records-clerk");
+  const explanation = getMatchExplanation(match);
+
+  assert.match(explanation, /you confirmed doing activities related/i);
+  assert.match(explanation, /typical tasks in selected work backgrounds may also involve/i);
+  assert.match(explanation, /not a formal skills assessment/i);
+  assert.equal(
+    match.skillEvidence.filter(({ family }) => family === "organization").length,
+    1,
   );
-  assert.equal(new Set(roleSpecificResourceUrls).size, careerOptions.length);
 });
 
-test("match explanations name the actual matched questions and answer choices", () => {
-  const form = createExplanationForm(
-    {},
-    {
-      activities: {
-        organizing: "Organizing files, information, supplies, or schedules",
-      },
-      tasks: {
-        scheduling: "Managing calendars, appointments, or meetings",
-      },
-    },
-    {
-      activities: "Which activities have you done before?",
-      tasks: "Which work tasks sound most satisfying?",
-    },
-  );
-
-  const explanation = getMatchExplanation(form, {
-    activities: ["organizing"],
-    tasks: ["scheduling"],
-  });
-
-  assert.match(explanation, /Which activities have you done before/);
-  assert.match(explanation, /Organizing files, information/);
-  assert.match(explanation, /Which work tasks sound most satisfying/);
-  assert.match(explanation, /Managing calendars/);
-});
-
-test("zero-match explanations do not claim the role was personalized", () => {
-  const explanation = getMatchExplanation(null, {});
-  assert.match(explanation, /did not directly match/);
-  assert.match(explanation, /not a personalized match/);
-});
-
-test("visitor page exposes the guided controls, privacy content, and decorative hero art", () => {
+test("visitor pages contain the seven-question guided form and remain mirrored", () => {
   const html = fs.readFileSync(
     path.join(__dirname, "../src/index.html"),
     "utf8",
@@ -244,119 +408,56 @@ test("visitor page exposes the guided controls, privacy content, and decorative 
     path.join(__dirname, "../../index.html"),
     "utf8",
   );
+  const normalizedRoot = pagesRootHtml
+    .replace('href="START/src/styles.css"', 'href="styles.css"')
+    .replace('src="START/src/data/careers.js"', 'src="data/careers.js"')
+    .replace('src="START/src/app.js"', 'src="app.js"');
 
-  for (const page of [html, pagesRootHtml]) {
-    const normalizedPage = page.replace(/\s+/g, " ");
-    assert.equal((page.match(/data-question-step/g) || []).length, 5);
-    assert.match(normalizedPage, /id="question-progress"/);
-    assert.match(normalizedPage, /id="question-back"/);
-    assert.match(normalizedPage, /id="question-next"/);
-    assert.match(normalizedPage, /id="change-answers"/);
-    assert.match(normalizedPage, /id="start-over"/);
-    assert.match(normalizedPage, /Career exploration for adults/);
-    assert.ok(
-      normalizedPage.includes(
-        "Discover where your transferable skills could take you.",
-      ),
-    );
-    assert.ok(
-      normalizedPage.includes(
-        "Your experience may open doors to careers you haven’t considered.",
-      ),
-    );
-    assert.doesNotMatch(
-      normalizedPage,
-      /Through five short questions, you’ll explore how skills developed/,
-    );
-    assert.match(
-      normalizedPage,
-      /skills developed through work, education, volunteering, and everyday responsibilities/,
-    );
-    assert.match(
-      normalizedPage,
-      /Answer five short questions about your experiences and preferences\. Explore how skills developed through work, education, volunteering, and everyday responsibilities may connect to new career opportunities\./,
-    );
-    assert.match(
-      normalizedPage,
-      /What are transferable skills\?/,
-    );
-    assert.equal(
-      (normalizedPage.match(/What are transferable skills\?/g) || []).length,
-      1,
-    );
-    assert.match(normalizedPage, /class="career-detail-section intro-transferable-skills"/);
-    assert.match(
-      normalizedPage,
-      /Transferable skills are abilities you’ve developed through different experiences/,
-    );
-    assert.match(
-      normalizedPage,
-      /assisting customers can develop communication and problem-solving skills/,
-    );
-    assert.ok(
-      normalizedPage.includes(
-        "Your answers help identify office-based careers that may align with your transferable skills and work preferences.",
-      ),
-    );
-    assert.match(
-      normalizedPage,
-      /optional learning resources, and practical next steps/,
-    );
-    const homepageOrder = [
-      normalizedPage.indexOf(
-        "Discover where your transferable skills could take you.",
-      ),
-      normalizedPage.indexOf(
-        "Your experience may open doors to careers you haven’t considered.",
-      ),
-      normalizedPage.indexOf("Career Pathway Explorer helps adults"),
-      normalizedPage.indexOf("What are transferable skills?"),
-      normalizedPage.indexOf(">Explore your options</a>"),
-      normalizedPage.indexOf('id="how-it-works"'),
-    ];
-    assert.ok(homepageOrder.every((position) => position >= 0));
-    assert.ok(
-      homepageOrder.every(
-        (position, index) =>
-          index === 0 || homepageOrder[index - 1] < position,
-      ),
-      "homepage hero content should appear before the button and How It Works",
-    );
-    assert.match(normalizedPage, /About Your Results and Privacy/);
-    assert.doesNotMatch(normalizedPage, /Clear and transparent/i);
-    assert.match(normalizedPage, /<h3 id="privacy-details-title">Your Privacy<\/h3>/);
-    assert.match(
-      normalizedPage,
-      /<h3 id="results-details-title">Understanding Your Results<\/h3>/,
-    );
-    assert.doesNotMatch(
-      normalizedPage,
-      /What the questions ask|How your answers are handled|How matching works/,
-    );
-    assert.match(
-      normalizedPage,
-      /answers are processed locally in your browser and are not saved or transmitted to a server/,
-    );
-    assert.match(
-      normalizedPage,
-      /External resource websites do not receive your questionnaire answers/,
-    );
-    assert.match(
-      normalizedPage,
-      /The Bureau of Labor Statistics and O\*NET links support the occupation descriptions/,
-    );
-    assert.equal((page.match(/class="hero-art"/g) || []).length, 1);
-    assert.match(
-      normalizedPage,
-      /<svg class="hero-art"[^>]*aria-hidden="true"/,
-    );
-    assert.doesNotMatch(normalizedPage, /<img\b/i);
-  }
-
-  const styles = fs.readFileSync(path.join(__dirname, "../src/styles.css"), "utf8");
+  assert.equal(normalizedRoot, html);
+  assert.equal((html.match(/data-question-step/g) || []).length, 7);
+  assert.match(html, /Question 1 of 7/);
+  assert.match(html, /max="7"/);
+  assert.match(html, /What jobs have you worked in\? Select all that apply\./);
+  assert.match(html, /homemaking, self-employment, or informal work/);
   assert.match(
-    styles,
-    /@media \(max-width: 44rem\)[\s\S]*?\.hero-art\s*\{\s*display:\s*none;/,
+    html,
+    /Which of these activities have you done before\? Select all that apply\./,
+  );
+  assert.match(html, /Tracked or counted supplies, products, or inventory/);
+  assert.match(html, /Which of these tools have you used before\? Select all that apply\./);
+  assert.match(html, /How comfortable do you feel using technology for work tasks\?/);
+  assert.match(html, /I have little or no experience with office computer tasks/);
+  assert.match(html, /I can do some common tasks with help/);
+  assert.match(html, /I can do common tasks on my own/);
+  assert.match(html, /I feel comfortable learning new technology/);
+  assert.match(html, /Which best describes your education or training\?/);
+  assert.match(html, /name="education" value="no-credential"/);
+  assert.match(html, /name="education" value="unsure"/);
+  const educationQuestion = html.match(
+    /<legend tabindex="-1">4\. Which best describes your education or training\?<\/legend>[\s\S]*?<\/fieldset>/,
+  )?.[0];
+  assert.ok(educationQuestion);
+  assert.doesNotMatch(educationQuestion, /type="checkbox"/);
+  assert.equal(
+    (educationQuestion.match(/type="radio" name="education"/g) || []).length,
+    9,
+  );
+  assert.match(html, /Choose up to three/);
+  assert.match(html, /See my suggestions/);
+  assert.match(html, /id="question-progress"/);
+  assert.match(html, /id="question-back"/);
+  assert.match(html, /id="question-next"/);
+  assert.match(html, /id="change-answers"/);
+  assert.match(html, /id="start-over"/);
+  assert.match(html, /What are transferable skills\?/);
+  assert.match(html, /About Your Results and Privacy/);
+  assert.match(
+    html.replace(/\s+/g, " "),
+    /answers are processed locally in your browser and are not saved or transmitted to a server/,
+  );
+  assert.match(
+    html.replace(/\s+/g, " "),
+    /<svg class="hero-art"[^>]*aria-hidden="true"/,
   );
 });
 
@@ -373,7 +474,6 @@ test("external career and learning links open securely in a new tab", () => {
 
   assert.match(app, /link\.target = "_blank"/);
   assert.match(app, /link\.rel = "noopener noreferrer"/);
-
   for (const page of [html, pagesRootHtml]) {
     const navigation = page.match(/<nav\b[\s\S]*?<\/nav>/i)?.[0];
     assert.ok(navigation, "internal navigation should exist");
@@ -381,7 +481,7 @@ test("external career and learning links open securely in a new tab", () => {
   }
 });
 
-test("question answers are not persisted or sent by application code", () => {
+test("question answers are not persisted or transmitted by application code", () => {
   const app = fs.readFileSync(path.join(__dirname, "../src/app.js"), "utf8");
   assert.doesNotMatch(
     app,

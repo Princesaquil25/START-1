@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Explore five administrative and office-based career paths using your existing experience, interests, and work preferences."
+      content="Explore administrative and office-based career paths using transferable skills from your experience, interests, and preferences."
     />
     <title>Career Pathway Explorer</title>
     <link rel="stylesheet" href="styles.css" />
@@ -142,7 +142,7 @@
             <span class="step-number" aria-hidden="true">1</span>
             <h3>Tell us about yourself</h3>
             <p>
-              Answer five short questions about your experiences and
+              Answer seven short questions about your experiences and
               preferences. Explore how skills developed through work,
               education, volunteering, and everyday responsibilities may
               connect to new career opportunities.
@@ -160,7 +160,7 @@
             <span class="step-number" aria-hidden="true">3</span>
             <h3>Discover possibilities</h3>
             <p>
-              Review three suggestions with match explanations, career details,
+              Review up to three suggestions with match explanations, career details,
               optional learning resources, and practical next steps.
             </p>
           </li>
@@ -184,155 +184,123 @@
         <form id="intake-form" class="intake-form" novalidate>
           <div class="progress-block">
             <p id="progress-label" class="progress-label" role="status">
-              Question 1 of 5
+              Question 1 of 7
             </p>
             <progress
               id="question-progress"
-              max="5"
+              max="7"
               value="1"
               aria-labelledby="progress-label"
             >
-              Question 1 of 5
+              Question 1 of 7
             </progress>
           </div>
 
           <fieldset data-question-step>
-            <legend tabindex="-1">1. Which activities have you done before?</legend>
-            <p class="question-help">Choose all that fit.</p>
-            <label class="answer-option">
-              <input type="checkbox" name="activities" value="helping-people" />
-              <span>Helping customers, visitors, coworkers, or community members</span>
-            </label>
-            <label class="answer-option">
-              <input type="checkbox" name="activities" value="communication" />
-              <span>Answering phones, messages, or emails</span>
-            </label>
-            <label class="answer-option">
-              <input type="checkbox" name="activities" value="organizing" />
-              <span>Organizing files, information, supplies, or schedules</span>
-            </label>
-            <label class="answer-option">
-              <input type="checkbox" name="activities" value="scheduling" />
-              <span>Making appointments or planning activities</span>
-            </label>
-            <label class="answer-option">
-              <input type="checkbox" name="activities" value="documents" />
-              <span>Entering information or preparing documents</span>
-            </label>
-            <label class="answer-option">
-              <input type="checkbox" name="activities" value="none" />
-              <span>None of these yet</span>
-            </label>
+            <legend tabindex="-1">1. What jobs have you worked in? Select all that apply.</legend>
+            <p class="question-help">Choose all that fit. Work experience can be from any setting.</p>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="janitorial" /><span>Janitorial or custodial cleaning</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="housekeeping" /><span>Housekeeping or room cleaning</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="manufacturing" /><span>Manufacturing, assembly, or production</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="construction" /><span>Construction labor</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="warehouse" /><span>Warehouse, stock, or material handling</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="retail" /><span>Retail sales</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="cashier" /><span>Cashier or payment handling</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="food-service" /><span>Food preparation or food service</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="agriculture" /><span>Farm, crop, or greenhouse work</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="caregiving" /><span>Home/personal care aide or caregiver (paid or unpaid)</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="childcare" /><span>Childcare worker or provider (paid or unpaid)</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="other" /><span>Other work or unpaid responsibilities, including homemaking, self-employment, or informal work</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="none" data-exclusive-option /><span>None of these / not sure</span></label>
           </fieldset>
 
           <fieldset data-question-step>
-            <legend tabindex="-1">2. What type of communication feels most comfortable?</legend>
-            <label class="answer-option">
-              <input type="radio" name="communication" value="in-person" />
-              <span>Greeting and helping people in person</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="communication" value="phone" />
-              <span>Talking with people by phone</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="communication" value="writing" />
-              <span>Writing emails, notes, or documents</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="communication" value="problem-solving" />
-              <span>Listening to questions and helping solve problems</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="communication" value="learning" />
-              <span>I am still building my communication skills</span>
-            </label>
+            <legend tabindex="-1">2. Which of these activities have you done before? Select all that apply.</legend>
+            <p class="question-help">Think about any setting, not only an office.</p>
+            <label class="answer-option"><input type="checkbox" name="activities" value="calls-visitors" /><span>Answered or routed calls, took messages, or greeted/directed visitors</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="explain-resolve" /><span>Answered questions, explained instructions or next steps, or helped resolve a problem</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="scheduling" /><span>Scheduled or confirmed appointments, meetings, or deliveries</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="enter-check-records" /><span>Entered or checked information in forms or records</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="organize-documents" /><span>Filed, scanned, organized, or retrieved documents or records</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="prepare-documents" /><span>Prepared or edited emails, letters, forms, or reports</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="team-coordination" /><span>Shared updates with coworkers or coordinated tasks with a team</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="payments" /><span>Handled invoices, payments, or receipts, or checked totals</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="track-supplies" /><span>Tracked or counted supplies, products, or inventory, and reported low or missing items</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="none" data-exclusive-option /><span>None of these / not sure</span></label>
           </fieldset>
 
           <fieldset data-question-step>
-            <legend tabindex="-1">3. Which work tasks sound most satisfying?</legend>
-            <label class="answer-option">
-              <input type="radio" name="tasks" value="organizing" />
-              <span>Keeping information organized and accurate</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="tasks" value="scheduling" />
-              <span>Managing calendars, appointments, or meetings</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="tasks" value="welcoming" />
-              <span>Welcoming visitors and helping them find the right person</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="tasks" value="resolving" />
-              <span>Answering questions and resolving problems</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="tasks" value="healthcare" />
-              <span>Supporting patients and organizing healthcare information</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="tasks" value="variety" />
-              <span>Completing a variety of general office tasks</span>
-            </label>
+            <legend tabindex="-1">3. Technology experience</legend>
+            <fieldset class="question-subgroup">
+              <legend>Which of these tools have you used before? Select all that apply.</legend>
+              <p class="question-help">Tools used measure experience; the next question asks how comfortable you feel with work tasks.</p>
+              <label class="answer-option"><input type="checkbox" name="technologyTools" value="smartphone" /><span>Smartphone or tablet</span></label>
+              <label class="answer-option"><input type="checkbox" name="technologyTools" value="payment-terminal" /><span>Cash register or payment terminal</span></label>
+              <label class="answer-option"><input type="checkbox" name="technologyTools" value="email" /><span>Email</span></label>
+              <label class="answer-option"><input type="checkbox" name="technologyTools" value="documents" /><span>Typed documents</span></label>
+              <label class="answer-option"><input type="checkbox" name="technologyTools" value="spreadsheets" /><span>Spreadsheets</span></label>
+              <label class="answer-option"><input type="checkbox" name="technologyTools" value="online-records" /><span>Online forms or records</span></label>
+              <label class="answer-option"><input type="checkbox" name="technologyTools" value="calendar" /><span>Calendar or scheduling tools</span></label>
+              <label class="answer-option"><input type="checkbox" name="technologyTools" value="inventory-system" /><span>Inventory or order system</span></label>
+              <label class="answer-option"><input type="checkbox" name="technologyTools" value="none" data-exclusive-option /><span>None yet</span></label>
+              <label class="answer-option"><input type="checkbox" name="technologyTools" value="unsure" data-exclusive-option /><span>Not sure</span></label>
+            </fieldset>
+            <fieldset class="question-subgroup">
+              <legend>How comfortable do you feel using technology for work tasks?</legend>
+              <label class="answer-option"><input type="radio" name="technologyComfort" value="little" /><span>I have little or no experience with office computer tasks</span></label>
+              <label class="answer-option"><input type="radio" name="technologyComfort" value="guided" /><span>I can do some common tasks with help</span></label>
+              <label class="answer-option"><input type="radio" name="technologyComfort" value="independent" /><span>I can do common tasks on my own</span></label>
+              <label class="answer-option"><input type="radio" name="technologyComfort" value="learning" /><span>I feel comfortable learning new technology</span></label>
+            </fieldset>
           </fieldset>
 
           <fieldset data-question-step>
-            <legend tabindex="-1">
-              4. How do you feel about learning workplace software and new
-              procedures?
-            </legend>
-            <label class="answer-option">
-              <input type="radio" name="software" value="enjoy" />
-              <span>I enjoy learning new computer tools</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="software" value="practice" />
-              <span>I can learn with practice and support</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="software" value="people-first" />
-              <span>I prefer people-focused tasks but can use basic software</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="software" value="experience" />
-              <span>
-                I have used scheduling, billing, office, or recordkeeping
-                systems before
-              </span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="software" value="training" />
-              <span>I would like training before using new systems independently</span>
-            </label>
+            <legend tabindex="-1">4. Which best describes your education or training?</legend>
+            <p class="question-help">Choose one. “Not sure / prefer not to answer” and “No formal credential yet” cannot be combined with another choice.</p>
+            <label class="answer-option"><input type="radio" name="education" value="no-credential" /><span>No formal credential yet</span></label>
+            <label class="answer-option"><input type="radio" name="education" value="some-high-school" /><span>Some high school</span></label>
+            <label class="answer-option"><input type="radio" name="education" value="high-school" /><span>High school diploma or equivalent</span></label>
+            <label class="answer-option"><input type="radio" name="education" value="some-college" /><span>Some college/university</span></label>
+            <label class="answer-option"><input type="radio" name="education" value="certificate" /><span>Certificate, license, or technical/vocational training</span></label>
+            <label class="answer-option"><input type="radio" name="education" value="apprenticeship" /><span>Apprenticeship or workplace training</span></label>
+            <label class="answer-option"><input type="radio" name="education" value="associate" /><span>Associate degree</span></label>
+            <label class="answer-option"><input type="radio" name="education" value="bachelor" /><span>Bachelor’s degree or higher</span></label>
+            <label class="answer-option"><input type="radio" name="education" value="unsure" /><span>Not sure / prefer not to answer</span></label>
           </fieldset>
 
           <fieldset data-question-step>
-            <legend tabindex="-1">5. Which workplace would you prefer to explore?</legend>
-            <label class="answer-option">
-              <input type="radio" name="workplace" value="general-office" />
-              <span>A general office with a variety of tasks</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="workplace" value="team-support" />
-              <span>A role supporting a manager or team with schedules and documents</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="workplace" value="front-desk" />
-              <span>A front desk where I welcome and guide people</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="workplace" value="service" />
-              <span>A service role where I answer questions and solve problems</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="workplace" value="healthcare" />
-              <span>A clinic, hospital, or other healthcare office</span>
-            </label>
-            <label class="answer-option">
-              <input type="radio" name="workplace" value="unsure" />
-              <span>I am not sure yet</span>
-            </label>
+            <legend tabindex="-1">5. How open are you to learning skills for a new kind of job?</legend>
+            <label class="answer-option"><input type="radio" name="trainingInterest" value="short-practice" /><span>Open to short lessons or free practice</span></label>
+            <label class="answer-option"><input type="radio" name="trainingInterest" value="structured-course" /><span>Would consider a certificate or structured course</span></label>
+            <label class="answer-option"><input type="radio" name="trainingInterest" value="extended-training" /><span>Could spend more time training if the career seems right</span></label>
+            <label class="answer-option"><input type="radio" name="trainingInterest" value="learn-on-job" /><span>Prefer to start with current skills and learn on the job</span></label>
+            <label class="answer-option"><input type="radio" name="trainingInterest" value="unsure" /><span>Not sure yet</span></label>
+            <label class="answer-option"><input type="radio" name="trainingInterest" value="not-now" /><span>Not looking for additional training now</span></label>
+          </fieldset>
+
+          <fieldset data-question-step>
+            <legend tabindex="-1">6. What would you prefer in your next work setting? Select all that matter.</legend>
+            <label class="answer-option"><input type="checkbox" name="environment" value="indoors" /><span>Mostly indoors</span></label>
+            <label class="answer-option"><input type="checkbox" name="environment" value="less-physical" /><span>Less lifting or heavy physical work</span></label>
+            <label class="answer-option"><input type="checkbox" name="environment" value="desk" /><span>Mostly desk/computer work</span></label>
+            <label class="answer-option"><input type="checkbox" name="environment" value="movement" /><span>Some standing or moving rather than sitting all day</span></label>
+            <label class="answer-option"><input type="checkbox" name="environment" value="people" /><span>Regular contact with people</span></label>
+            <label class="answer-option"><input type="checkbox" name="environment" value="independent" /><span>More independent/quieter work</span></label>
+            <label class="answer-option"><input type="checkbox" name="environment" value="team" /><span>Working with a team</span></label>
+            <label class="answer-option"><input type="checkbox" name="environment" value="onsite" /><span>On-site work</span></label>
+            <label class="answer-option"><input type="checkbox" name="environment" value="unsure" data-exclusive-option /><span>No strong preference / not sure</span></label>
+          </fieldset>
+
+          <fieldset data-question-step>
+            <legend tabindex="-1">7. What matters most as you consider a new career? Choose up to three.</legend>
+            <p class="question-help">“Not sure yet” is a choice by itself.</p>
+            <label class="answer-option"><input type="checkbox" name="priorities" value="pay" /><span>Better pay potential than previous/current work</span></label>
+            <label class="answer-option"><input type="checkbox" name="priorities" value="predictable-hours" /><span>More predictable hours</span></label>
+            <label class="answer-option"><input type="checkbox" name="priorities" value="less-physical" /><span>Less physically demanding work</span></label>
+            <label class="answer-option"><input type="checkbox" name="priorities" value="learning" /><span>Chance to learn</span></label>
+            <label class="answer-option"><input type="checkbox" name="priorities" value="advancement" /><span>Opportunity to advance over time</span></label>
+            <label class="answer-option"><input type="checkbox" name="priorities" value="service" /><span>Helping or serving people</span></label>
+            <label class="answer-option"><input type="checkbox" name="priorities" value="unsure" data-exclusive-option /><span>Not sure yet</span></label>
           </fieldset>
 
           <p
@@ -347,7 +315,7 @@
             </button>
             <button id="question-next" type="button">Next</button>
             <button id="submit-answers" type="submit" hidden>
-              See my three suggestions
+              See my suggestions
             </button>
           </div>
         </form>
@@ -367,10 +335,11 @@
       >
         <div class="section-heading">
           <p class="eyebrow">A starting point for exploration</p>
-          <h2 id="recommendations-title" tabindex="-1">Three options to explore</h2>
+          <h2 id="recommendations-title" tabindex="-1">Options to explore</h2>
           <p>
             These suggestions are based on your answers and are not predictions,
-            qualification checks, or guarantees of employment.
+            qualification checks, or guarantees of employment. We show no
+            more than three suggestions with relevant skill evidence.
           </p>
         </div>
         <ol id="recommendation-list" class="recommendation-list"></ol>

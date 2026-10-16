@@ -327,6 +327,17 @@ fieldset {
   border: 0;
 }
 
+.question-subgroup {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.question-subgroup legend {
+  margin-bottom: 0.65rem;
+  font-size: 1.05rem;
+}
+
 legend {
   display: block;
   width: 100%;

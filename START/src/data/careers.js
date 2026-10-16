@@ -2,13 +2,23 @@ const careerRecords = [
   {
     id: "administrative-assistant",
     title: "Administrative Assistant",
-    matchSignals: {
-      activities: ["organizing", "scheduling", "documents"],
-      communication: ["phone", "writing"],
-      tasks: ["organizing", "scheduling", "variety"],
-      software: ["enjoy", "practice", "experience"],
-      workplace: ["general-office", "team-support"],
-    },
+    skillFamilies: [
+      "organization",
+      "scheduling",
+      "document-management",
+      "communication",
+      "coordination",
+      "accuracy",
+      "inventory-tracking",
+      "teamwork",
+      "customer-service",
+      "recordkeeping",
+    ],
+    environmentPreferences: ["indoors", "desk", "team", "people", "onsite"],
+    priorityPreferences: ["pay", "predictable-hours", "less-physical", "learning", "advancement"],
+    technologyNeeds: ["email", "documents", "spreadsheets", "calendar"],
+    preparationNote:
+      "Employers commonly look for everyday office-software skills; practice with documents, calendars, and spreadsheets can help you compare your experience with local postings.",
     description:
       "Administrative assistants help an office or team stay organized. The exact mix of work depends on the organization and the people they support.",
     responsibilities: [
@@ -101,13 +111,20 @@ const careerRecords = [
   {
     id: "receptionist",
     title: "Receptionist",
-    matchSignals: {
-      activities: ["helping-people", "communication"],
-      communication: ["in-person", "phone"],
-      tasks: ["welcoming"],
-      software: ["practice", "people-first"],
-      workplace: ["front-desk"],
-    },
+    skillFamilies: [
+      "communication",
+      "customer-service",
+      "coordination",
+      "scheduling",
+      "problem-solving",
+      "accuracy",
+      "recordkeeping",
+    ],
+    environmentPreferences: ["indoors", "desk", "people", "team", "onsite", "movement"],
+    priorityPreferences: ["pay", "predictable-hours", "less-physical", "service", "advancement"],
+    technologyNeeds: ["email", "calendar", "online-records"],
+    preparationNote:
+      "Practice concise phone messages, email, and calendar tasks. Some reception jobs involve standing, frequent interruptions, or busy public-facing service.",
     description:
       "Receptionists are often the first contact for visitors and callers. They welcome people, find out what they need, and connect them with the right person or service.",
     responsibilities: [
@@ -196,13 +213,20 @@ const careerRecords = [
   {
     id: "customer-service-representative",
     title: "Customer Service Representative",
-    matchSignals: {
-      activities: ["helping-people", "communication"],
-      communication: ["phone", "problem-solving"],
-      tasks: ["resolving"],
-      software: ["practice", "people-first"],
-      workplace: ["service"],
-    },
+    skillFamilies: [
+      "customer-service",
+      "communication",
+      "problem-solving",
+      "recordkeeping",
+      "digital-systems",
+      "teamwork",
+      "written-communication",
+    ],
+    environmentPreferences: ["indoors", "desk", "people", "team", "onsite"],
+    priorityPreferences: ["pay", "predictable-hours", "less-physical", "learning", "service", "advancement"],
+    technologyNeeds: ["email", "online-records", "documents"],
+    preparationNote:
+      "Customer-service roles vary: some are in person, while others use phones, email, chat, or customer databases. Employers generally train workers on their own products and systems.",
     description:
       "Customer service representatives answer questions about an organization’s products or services. They may resolve routine concerns, record interactions, or refer more complex issues to another team.",
     responsibilities: [
@@ -291,13 +315,22 @@ const careerRecords = [
   {
     id: "medical-administrative-assistant",
     title: "Medical Administrative Assistant",
-    matchSignals: {
-      activities: ["helping-people", "organizing", "scheduling", "documents"],
-      communication: ["in-person", "phone", "writing"],
-      tasks: ["healthcare"],
-      software: ["practice", "experience", "training"],
-      workplace: ["healthcare"],
-    },
+    skillFamilies: [
+      "communication",
+      "customer-service",
+      "scheduling",
+      "recordkeeping",
+      "accuracy",
+      "document-management",
+      "procedure-following",
+      "coordination",
+      "problem-solving",
+    ],
+    environmentPreferences: ["indoors", "desk", "people", "team", "onsite", "movement"],
+    priorityPreferences: ["pay", "predictable-hours", "less-physical", "learning", "service", "advancement"],
+    technologyNeeds: ["email", "calendar", "online-records", "documents"],
+    preparationNote:
+      "Medical terminology, privacy procedures, and clinic-specific systems may require additional learning. Requirements vary by employer; administrative work does not authorize clinical duties.",
     description:
       "Medical administrative assistants support the clerical work of a clinic, hospital, or other healthcare office. They may schedule visits, communicate routine information, and maintain patient records.",
     responsibilities: [
@@ -390,13 +423,20 @@ const careerRecords = [
   {
     id: "records-clerk",
     title: "Records Clerk",
-    matchSignals: {
-      activities: ["organizing", "documents"],
-      communication: ["writing"],
-      tasks: ["organizing"],
-      software: ["enjoy", "experience"],
-      workplace: ["general-office", "team-support"],
-    },
+    skillFamilies: [
+      "document-management",
+      "recordkeeping",
+      "organization",
+      "accuracy",
+      "procedure-following",
+      "digital-systems",
+      "written-communication",
+    ],
+    environmentPreferences: ["indoors", "desk", "independent", "team", "onsite"],
+    priorityPreferences: ["pay", "predictable-hours", "less-physical", "learning", "advancement"],
+    technologyNeeds: ["documents", "spreadsheets", "online-records"],
+    preparationNote:
+      "Practice consistent file naming, document retrieval, careful data entry, and spreadsheet basics. Specialized medical or government records roles may have additional rules or requirements.",
     description:
       "Records clerks organize and retrieve paper or electronic documents so information can be found when authorized staff need it. The systems and rules depend on the organization.",
     responsibilities: [
@@ -482,12 +522,569 @@ const careerRecords = [
       },
     ],
   },
+  {
+    id: "general-office-clerk",
+    title: "General Office Clerk",
+    skillFamilies: [
+      "organization",
+      "recordkeeping",
+      "accuracy",
+      "document-management",
+      "communication",
+      "teamwork",
+      "coordination",
+      "inventory-tracking",
+      "customer-service",
+      "digital-systems",
+    ],
+    environmentPreferences: ["indoors", "desk", "team", "people", "onsite"],
+    priorityPreferences: ["pay", "predictable-hours", "less-physical", "learning", "advancement"],
+    technologyNeeds: ["email", "documents", "spreadsheets", "online-records"],
+    preparationNote:
+      "General office clerk duties differ by employer and may combine filing, data entry, phones, mail, and customer service. Basic computer practice and attention to detail can support preparation.",
+    description:
+      "General office clerks perform routine clerical tasks that help an organization keep information, documents, and daily office work organized. The task mix depends on the employer.",
+    responsibilities: [
+      "Enter, update, or check information in paper or electronic records.",
+      "File, scan, copy, or retrieve documents and route mail or messages.",
+      "Answer routine questions, direct calls, or help visitors find the right contact.",
+      "Support other staff with basic scheduling, forms, and office tasks.",
+    ],
+    skills: [
+      "Organization and consistent follow-through",
+      "Accurate data entry and attention to detail",
+      "Clear communication and customer service",
+      "Basic word-processing, spreadsheet, and email skills",
+      "Ability to follow workplace procedures and protect sensitive information",
+    ],
+    qualifications:
+      "A high school diploma or equivalent is typical for many general office clerk jobs, and routine duties are often learned on the job. Employers may ask for typing, computer, or customer-service experience; requirements vary and some roles have additional requirements.",
+    transferableSkills: [
+      {
+        background: "Cleaning, caregiving, or food service",
+        example:
+          "Following routines, tracking supplies, or keeping simple logs may connect to office procedures and record updates when those tasks were part of your experience.",
+      },
+      {
+        background: "Warehouse or manufacturing",
+        example:
+          "Checking labels, quantities, or work instructions may connect to careful data entry and document handling.",
+      },
+      {
+        background: "Retail or cashier work",
+        example:
+          "Answering questions, handling transactions, and maintaining accurate information may relate to routine office and customer-service tasks.",
+      },
+    ],
+    developSkills: [
+      "Practice creating a short document and saving it with a clear file name.",
+      "Build spreadsheet basics, such as entering, sorting, and checking information.",
+      "Practice accurate data entry, email, and routine phone-message tasks.",
+    ],
+    alternativeTitles: ["Office Assistant", "Clerical Assistant", "Office Support Clerk"],
+    nextSteps: [
+      "Compare local general office clerk and office assistant postings to see which tasks and education requirements recur.",
+      "Use a free document or spreadsheet lesson to practice the specific computer tasks mentioned in postings.",
+      "Prepare examples of following procedures, organizing information, or helping people in previous work.",
+    ],
+    careerPathway: ["General Office Clerk", "Administrative Assistant", "Office Coordinator"],
+    resources: [
+      {
+        name: "LearnFree: Word Foundations",
+        url: "https://www.learnfree.org/series/word-foundations",
+        detail: "Free, self-paced practice for creating and formatting workplace documents.",
+        cost: "Free; optional practice, not an employment requirement.",
+      },
+      {
+        name: "LearnFree: Excel Foundations",
+        url: "https://www.learnfree.org/series/excel-foundations",
+        detail: "Free lessons for organizing information in spreadsheets and using basic formulas.",
+        cost: "Free; optional skill-building.",
+      },
+    ],
+    sources: [
+      {
+        name: "U.S. Bureau of Labor Statistics: General Office Clerks",
+        url: "https://www.bls.gov/ooh/office-and-administrative-support/general-office-clerks.htm",
+      },
+      {
+        name: "O*NET OnLine: Office Clerks, General (43-9061.00)",
+        url: "https://www.onetonline.org/link/summary/43-9061.00",
+      },
+    ],
+  },
+  {
+    id: "billing-posting-clerk",
+    title: "Billing and Posting Clerk",
+    skillFamilies: [
+      "transaction-accuracy",
+      "accuracy",
+      "recordkeeping",
+      "document-management",
+      "numeracy",
+      "procedure-following",
+      "digital-systems",
+      "problem-solving",
+    ],
+    environmentPreferences: ["indoors", "desk", "independent", "team", "onsite"],
+    priorityPreferences: ["pay", "predictable-hours", "less-physical", "learning", "advancement"],
+    technologyNeeds: ["spreadsheets", "online-records", "email", "documents"],
+    preparationNote:
+      "These roles rely on careful number and record checking and may use billing or accounting software. Employers may request prior data-entry or billing experience; requirements vary.",
+    description:
+      "Billing and posting clerks prepare bills, record payments, or update account information. Accuracy and following an employer’s procedures are important, and the exact duties vary by industry.",
+    responsibilities: [
+      "Prepare invoices or billing statements using account and transaction information.",
+      "Enter payments, charges, or adjustments into electronic records.",
+      "Check totals and source documents for missing or inconsistent information.",
+      "Respond to routine billing questions or refer complex issues to the appropriate staff.",
+    ],
+    skills: [
+      "Attention to detail and numerical accuracy",
+      "Careful recordkeeping and data entry",
+      "Comfort using spreadsheets or billing software",
+      "Ability to follow written procedures",
+      "Clear communication when clarifying routine account information",
+    ],
+    qualifications:
+      "A high school diploma or equivalent is commonly requested for entry-level clerical work. Employers may prefer bookkeeping, data-entry, spreadsheet, or billing experience and typically teach organization-specific systems. Specialized billing work may require additional industry knowledge; there is no single credential required for every billing clerk role.",
+    transferableSkills: [
+      {
+        background: "Cashier or retail work",
+        example:
+          "Checking totals, issuing receipts, and reconciling transactions may connect to payment posting and billing accuracy.",
+      },
+      {
+        background: "Warehouse or production work",
+        example:
+          "Comparing labels, counts, or work records may connect to checking billing details against source information.",
+      },
+      {
+        background: "Customer service",
+        example:
+          "Listening to questions and explaining next steps may help with routine billing inquiries, with employer policies learned on the job.",
+      },
+    ],
+    developSkills: [
+      "Practice spreadsheet data entry, sorting, and basic formulas.",
+      "Build comfort checking amounts and comparing entries with source documents.",
+      "Learn the basics of invoices, receipts, and routine account records.",
+    ],
+    alternativeTitles: ["Billing Clerk", "Posting Clerk", "Invoice Clerk"],
+    nextSteps: [
+      "Compare billing clerk postings across employers and note which software or experience requirements recur.",
+      "Practice spreadsheet accuracy with a sample, non-sensitive list of invoice amounts.",
+      "Look for general office or accounts-support roles if postings require experience you have not yet gained.",
+    ],
+    careerPathway: ["Billing and Posting Clerk", "Accounting Clerk", "Bookkeeping Clerk"],
+    resources: [
+      {
+        name: "LearnFree: Excel Foundations",
+        url: "https://www.learnfree.org/series/excel-foundations",
+        detail: "Free practice for entering, checking, and organizing numerical information.",
+        cost: "Free; optional learning, not a billing credential.",
+      },
+      {
+        name: "LearnFree: Word Foundations",
+        url: "https://www.learnfree.org/series/word-foundations",
+        detail: "Free practice for working with routine documents and written information.",
+        cost: "Free; optional skill-building.",
+      },
+    ],
+    sources: [
+      {
+        name: "O*NET OnLine: Billing and Posting Clerks (43-3021.00)",
+        url: "https://www.onetonline.org/link/summary/43-3021.00",
+      },
+      {
+        name: "U.S. Bureau of Labor Statistics: Billing and Posting Clerks (OEWS)",
+        url: "https://www.bls.gov/oes/current/oes433021.htm",
+      },
+    ],
+  },
+  {
+    id: "eligibility-interviewer",
+    title: "Eligibility Interviewer, Government Programs",
+    skillFamilies: [
+      "communication",
+      "customer-service",
+      "recordkeeping",
+      "accuracy",
+      "problem-solving",
+      "procedure-following",
+      "document-management",
+      "coordination",
+    ],
+    environmentPreferences: ["indoors", "desk", "people", "team", "onsite"],
+    priorityPreferences: ["pay", "predictable-hours", "less-physical", "learning", "service", "advancement"],
+    technologyNeeds: ["online-records", "email", "documents"],
+    preparationNote:
+      "Program rules, privacy practices, and case-management systems are specific to the agency and usually require substantial employer training. Some roles involve interviewing the public and handling sensitive information.",
+    description:
+      "Eligibility interviewers gather information and help determine whether applicants meet requirements for government assistance programs. Program rules and duties vary by agency.",
+    responsibilities: [
+      "Interview applicants and record information relevant to program eligibility.",
+      "Review forms and supporting documents for completeness.",
+      "Explain application steps and program requirements using agency guidance.",
+      "Refer applicants to services or follow up on missing information when assigned.",
+    ],
+    skills: [
+      "Respectful interviewing and clear communication",
+      "Careful documentation and attention to detail",
+      "Ability to follow detailed rules and procedures",
+      "Customer service and problem-solving",
+      "Discretion when handling private information",
+    ],
+    qualifications:
+      "Education and experience requirements vary by agency and program. Employers often provide training on program rules, case systems, and privacy procedures; some may require related experience, assessments, or additional education. Review each employer’s requirements rather than assuming a universal qualification.",
+    transferableSkills: [
+      {
+        background: "Caregiving or community service",
+        example:
+          "Listening, explaining routine steps, and recording observations may relate to respectful applicant communication and documentation, but does not establish knowledge of government program rules.",
+      },
+      {
+        background: "Retail or customer service",
+        example:
+          "Answering questions and resolving routine concerns may connect to helping applicants understand the next step within agency guidance.",
+      },
+      {
+        background: "Office, warehouse, or production work",
+        example:
+          "Checking information against instructions and reporting missing details may connect to reviewing forms for completeness.",
+      },
+    ],
+    developSkills: [
+      "Practice clear, neutral note-taking and asking follow-up questions respectfully.",
+      "Build basic computer skills for forms, email, and online records.",
+      "Learn privacy and confidentiality practices required by the specific employer.",
+    ],
+    alternativeTitles: ["Benefits Interviewer", "Eligibility Specialist", "Public Assistance Interviewer"],
+    nextSteps: [
+      "Review local public-agency postings and compare education, background-check, and program-training requirements.",
+      "Explore entry-level public-service or office-assistant roles if direct eligibility experience is requested.",
+      "Practice organizing forms and explaining a process in simple, respectful language.",
+    ],
+    careerPathway: ["Eligibility Interviewer", "Eligibility Specialist", "Program Supervisor"],
+    resources: [
+      {
+        name: "Microsoft Learn: Discover New Outlook for Windows",
+        url: "https://learn.microsoft.com/en-us/training/paths/discover-new-outlook-windows/",
+        detail: "Free lessons on email and calendar tasks used in many office settings.",
+        cost: "Free; optional technology practice.",
+      },
+      {
+        name: "LearnFree: Word Foundations",
+        url: "https://www.learnfree.org/series/word-foundations",
+        detail: "Free practice for routine documents and written communication.",
+        cost: "Free; optional skill-building.",
+      },
+    ],
+    sources: [
+      {
+        name: "O*NET OnLine: Eligibility Interviewers, Government Programs (43-4061.00)",
+        url: "https://www.onetonline.org/link/summary/43-4061.00",
+      },
+      {
+        name: "CareerOneStop: Eligibility Interviewers, Government Programs",
+        url: "https://www.careeronestop.org/Toolkit/Careers/Occupations/occupation-profile.aspx?keyword=Eligibility%20Interviewers%2C%20Government%20Programs&location=United%20States&onetcode=43-4061.00",
+      },
+    ],
+  },
+  {
+    id: "production-planning-clerk",
+    title: "Production, Planning, and Expediting Clerk",
+    skillFamilies: [
+      "coordination",
+      "recordkeeping",
+      "accuracy",
+      "inventory-tracking",
+      "instruction-following",
+      "problem-solving",
+      "communication",
+      "teamwork",
+      "digital-systems",
+    ],
+    environmentPreferences: ["indoors", "desk", "team", "onsite", "movement"],
+    priorityPreferences: ["pay", "predictable-hours", "learning", "advancement"],
+    technologyNeeds: ["spreadsheets", "online-records", "email"],
+    preparationNote:
+      "These jobs may use spreadsheets or production-planning systems and may be located near manufacturing operations. Some workplaces include noise, time pressure, or floor visits, so check the setting and physical duties in each posting.",
+    description:
+      "Production, planning, and expediting clerks coordinate materials and work schedules so production activities can proceed. The work is tied to the needs and systems of a particular operation.",
+    responsibilities: [
+      "Review work orders or schedules and communicate timing or material needs.",
+      "Track production progress, inventory, and order status in records or software.",
+      "Coordinate with production, purchasing, or shipping staff about delays or shortages.",
+      "Prepare reports and help update plans when priorities change.",
+    ],
+    skills: [
+      "Organization and coordination across tasks or teams",
+      "Accurate tracking of orders, materials, and schedules",
+      "Problem-solving and follow-up when information changes",
+      "Clear communication with production and office staff",
+      "Comfort learning spreadsheets or production systems",
+    ],
+    qualifications:
+      "A high school diploma or equivalent is common, with duties and experience expectations varying by employer. Some workers learn planning procedures on the job; employers may prefer production, inventory, scheduling, or computer-system experience. Industry-specific processes and software can require additional training.",
+    transferableSkills: [
+      {
+        background: "Warehouse or stock work",
+        example:
+          "Tracking quantities, checking orders, and reporting shortages may connect to monitoring materials and updating order status.",
+      },
+      {
+        background: "Manufacturing or construction",
+        example:
+          "Following work instructions, checking progress, and coordinating materials may relate to work-order and schedule support.",
+      },
+      {
+        background: "Food service or caregiving",
+        example:
+          "Coordinating tasks and adapting when supplies or timing change may connect to follow-up and schedule coordination, if those duties were part of your experience.",
+      },
+    ],
+    developSkills: [
+      "Practice spreadsheet sorting, status tracking, and simple formulas.",
+      "Learn how work orders, inventory records, and delivery schedules fit together.",
+      "Build confidence communicating updates and documenting delays or shortages.",
+    ],
+    alternativeTitles: ["Production Clerk", "Expediting Clerk", "Production Scheduler"],
+    nextSteps: [
+      "Compare production planning postings with general office and inventory roles to see which requirements are shared.",
+      "Check whether the role is office-based, near a production floor, or includes physical materials handling.",
+      "Practice tracking a sample order list in a spreadsheet and clearly noting status changes.",
+    ],
+    careerPathway: ["Production Clerk", "Production Planner", "Production Coordinator"],
+    resources: [
+      {
+        name: "LearnFree: Excel Foundations",
+        url: "https://www.learnfree.org/series/excel-foundations",
+        detail: "Free practice organizing lists and tracking status in spreadsheets.",
+        cost: "Free; optional practice, not an employer-specific system credential.",
+      },
+      {
+        name: "Microsoft Learn: Excel training",
+        url: "https://support.microsoft.com/en-us/excel",
+        detail: "Free help and learning materials for spreadsheet tasks.",
+        cost: "Free; optional technology practice.",
+      },
+    ],
+    sources: [
+      {
+        name: "O*NET OnLine: Production, Planning, and Expediting Clerks (43-5061.00)",
+        url: "https://www.onetonline.org/link/summary/43-5061.00",
+      },
+      {
+        name: "U.S. Bureau of Labor Statistics: Production, Planning, and Expediting Clerks (OEWS)",
+        url: "https://www.bls.gov/oes/current/oes435061.htm",
+      },
+    ],
+  },
 ];
 
+const careerMatchingData = {
+  skillLabels: {
+    accuracy: "accuracy and checking details",
+    communication: "communication",
+    coordination: "coordination and follow-up",
+    "customer-service": "customer service",
+    "digital-systems": "using digital systems",
+    "document-management": "organizing and retrieving documents",
+    "instruction-following": "following instructions",
+    "inventory-tracking": "tracking supplies or inventory",
+    numeracy: "working accurately with numbers",
+    "observation-reporting": "noticing and reporting information",
+    organization: "organization",
+    "problem-solving": "problem-solving",
+    "procedure-following": "following procedures",
+    "quality-checking": "quality checking",
+    recordkeeping: "recordkeeping",
+    scheduling: "scheduling",
+    teamwork: "teamwork",
+    "transaction-accuracy": "transaction and payment accuracy",
+    "written-communication": "written communication",
+  },
+  occupations: {
+    janitorial: {
+      label: "Janitorial or custodial cleaning",
+      taskBasis: "Typical tasks can include following procedures, tracking supplies, monitoring safety, and reporting maintenance issues.",
+      skills: ["procedure-following", "inventory-tracking", "organization", "observation-reporting"],
+      sources: [
+        {
+          name: "O*NET: Janitors and Cleaners (37-2011.00)",
+          url: "https://www.onetonline.org/link/summary/37-2011.00",
+        },
+      ],
+    },
+    housekeeping: {
+      label: "Housekeeping or room cleaning",
+      taskBasis: "Typical tasks can include restocking supplies, following cleanliness standards, organizing materials, and reporting damage or shortages.",
+      skills: ["inventory-tracking", "procedure-following", "organization", "observation-reporting", "quality-checking"],
+      sources: [
+        {
+          name: "O*NET: Maids and Housekeeping Cleaners (37-2012.00)",
+          url: "https://www.onetonline.org/link/summary/37-2012.00",
+        },
+      ],
+    },
+    manufacturing: {
+      label: "Manufacturing, assembly, or production",
+      taskBasis: "Some roles use work orders, check product quality, coordinate with coworkers, and complete production records.",
+      skills: ["instruction-following", "quality-checking", "recordkeeping", "teamwork", "problem-solving", "coordination"],
+      sources: [
+        {
+          name: "O*NET: Team Assemblers (51-2092.00)",
+          url: "https://www.onetonline.org/link/summary/51-2092.00",
+        },
+      ],
+    },
+    construction: {
+      label: "Construction labor",
+      taskBasis: "Typical tasks can involve following instructions, coordinating materials or work sequences, communicating with a crew, and reporting safety issues.",
+      skills: ["instruction-following", "coordination", "teamwork", "observation-reporting", "problem-solving"],
+      sources: [
+        {
+          name: "O*NET: Construction Laborers (47-2061.00)",
+          url: "https://www.onetonline.org/link/summary/47-2061.00",
+        },
+      ],
+    },
+    warehouse: {
+      label: "Warehouse, stock, or material handling",
+      taskBasis: "Some roles use work orders, label items, count quantities, maintain inventory information, and report discrepancies.",
+      skills: ["inventory-tracking", "accuracy", "procedure-following", "coordination", "observation-reporting", "recordkeeping"],
+      sources: [
+        {
+          name: "O*NET: Hand Material Movers (53-7062.00)",
+          url: "https://www.onetonline.org/link/summary/53-7062.00",
+        },
+        {
+          name: "O*NET: Stockers and Order Fillers (53-7065.00)",
+          url: "https://www.onetonline.org/link/summary/53-7065.00",
+        },
+      ],
+    },
+    retail: {
+      label: "Retail sales",
+      taskBasis: "Typical tasks can include answering customer questions, processing sales or returns, and maintaining sales or inventory information.",
+      skills: ["customer-service", "communication", "problem-solving", "transaction-accuracy", "inventory-tracking"],
+      sources: [
+        {
+          name: "O*NET: Retail Salespersons (41-2031.00)",
+          url: "https://www.onetonline.org/link/summary/41-2031.00",
+        },
+      ],
+    },
+    cashier: {
+      label: "Cashier or payment handling",
+      taskBasis: "Typical tasks can include receiving payments, issuing receipts, recording totals, and answering customer questions.",
+      skills: ["customer-service", "transaction-accuracy", "accuracy", "communication", "problem-solving", "numeracy"],
+      sources: [
+        {
+          name: "O*NET: Cashiers (41-2011.00)",
+          url: "https://www.onetonline.org/link/summary/41-2011.00",
+        },
+      ],
+    },
+    "food-service": {
+      label: "Food preparation or food service",
+      taskBasis: "Tasks vary by role and can include following food-safety procedures, checking supplies, serving customers, and coordinating during busy periods.",
+      skills: ["procedure-following", "inventory-tracking", "teamwork", "customer-service", "quality-checking", "recordkeeping", "coordination", "communication"],
+      sources: [
+        {
+          name: "O*NET: Food Preparation Workers (35-2021.00)",
+          url: "https://www.onetonline.org/link/summary/35-2021.00",
+        },
+        {
+          name: "O*NET: Waiters and Waitresses (35-3031.00)",
+          url: "https://www.onetonline.org/link/summary/35-3031.00",
+        },
+      ],
+    },
+    agriculture: {
+      label: "Farm, crop, or greenhouse work",
+      taskBasis: "Some roles involve recording crop information, checking or sorting products, tracking supplies, and following work procedures.",
+      skills: ["quality-checking", "recordkeeping", "inventory-tracking", "procedure-following", "observation-reporting", "accuracy"],
+      sources: [
+        {
+          name: "O*NET: Farmworkers and Laborers, Crop, Nursery, and Greenhouse (45-2092.00)",
+          url: "https://www.onetonline.org/link/summary/45-2092.00",
+        },
+      ],
+    },
+    caregiving: {
+      label: "Home or personal care aide / caregiver",
+      taskBasis: "Some caregiving roles include recording observations, communicating updates, coordinating routines, and following care instructions. This does not imply medical-administration expertise.",
+      skills: ["communication", "observation-reporting", "recordkeeping", "scheduling", "procedure-following", "problem-solving"],
+      sources: [
+        {
+          name: "O*NET: Home Health Aides (31-1121.00)",
+          url: "https://www.onetonline.org/link/summary/31-1121.00",
+        },
+        {
+          name: "O*NET: Personal Care Aides (31-1122.00)",
+          url: "https://www.onetonline.org/link/summary/31-1122.00",
+        },
+      ],
+    },
+    childcare: {
+      label: "Childcare worker or provider",
+      taskBasis: "Some childcare tasks include maintaining attendance information, communicating with families, coordinating routines, and completing records.",
+      skills: ["communication", "observation-reporting", "recordkeeping", "scheduling", "procedure-following", "coordination", "customer-service"],
+      sources: [
+        {
+          name: "O*NET: Childcare Workers (39-9011.00)",
+          url: "https://www.onetonline.org/link/summary/39-9011.00",
+        },
+      ],
+    },
+  },
+  activities: {
+    "calls-visitors": {
+      label: "Answered or routed calls, took messages, or greeted/directed visitors",
+      skills: ["communication", "customer-service", "coordination"],
+    },
+    "explain-resolve": {
+      label: "Answered questions, explained instructions or next steps, or helped resolve a problem",
+      skills: ["communication", "customer-service", "problem-solving"],
+    },
+    scheduling: {
+      label: "Scheduled or confirmed appointments, meetings, or deliveries",
+      skills: ["scheduling", "coordination", "accuracy"],
+    },
+    "enter-check-records": {
+      label: "Entered or checked information in forms or records",
+      skills: ["recordkeeping", "accuracy", "digital-systems"],
+    },
+    "organize-documents": {
+      label: "Filed, scanned, organized, or retrieved documents or records",
+      skills: ["document-management", "organization", "accuracy", "recordkeeping"],
+    },
+    "prepare-documents": {
+      label: "Prepared or edited emails, letters, forms, or reports",
+      skills: ["written-communication", "document-management", "accuracy"],
+    },
+    "team-coordination": {
+      label: "Shared updates with coworkers or coordinated tasks with a team",
+      skills: ["communication", "teamwork", "coordination"],
+    },
+    "track-supplies": {
+      label: "Tracked or counted supplies, products, or inventory, and reported low or missing items",
+      skills: ["inventory-tracking", "accuracy", "coordination", "recordkeeping", "observation-reporting"],
+    },
+    payments: {
+      label: "Handled invoices, payments, or receipts, or checked totals",
+      skills: ["transaction-accuracy", "numeracy", "recordkeeping", "accuracy"],
+    },
+  },
+};
+
 if (typeof module !== "undefined") {
-  module.exports = careerRecords;
+  module.exports = { careerRecords, careerMatchingData };
 }
 
 if (typeof globalThis !== "undefined") {
   globalThis.careerOptions = careerRecords;
+  globalThis.careerMatchingData = careerMatchingData;
 }
