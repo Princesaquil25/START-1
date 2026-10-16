@@ -29,37 +29,24 @@
         <div class="intro-content">
           <p class="eyebrow">Career exploration for adults</p>
           <h1 id="page-title">
-            Discover where your transferable skills could take you.
+            Your experience may open doors to careers you haven't considered.
           </h1>
           <p class="intro-lede">
-            Your experience may open doors to careers you haven’t considered.
+            Career Pathway Explorer is designed for adults looking to transition
+            from jobs in retail, manufacturing, cleaning, food service,
+            caregiving, and other fields into entry-level administrative and
+            office-based careers.
           </p>
           <p class="intro-lede">
-            Career Pathway Explorer helps adults explore entry-level
-            administrative and office-based careers, including those with little
-            or no previous office experience or formal training in the field.
+            Through a skills-based assessment, you'll discover how the skills
+            you've gained through previous work may transfer to new career
+            opportunities. You'll explore potential career matches, understand
+            why they may be a good fit, and receive personalized next steps and
+            free learning resources to help you prepare.
           </p>
-          <section
-            class="career-detail-section intro-transferable-skills"
-            aria-labelledby="transferable-skills-title"
-          >
-            <h2 id="transferable-skills-title">
-              What are transferable skills?
-            </h2>
-            <p>
-              Transferable skills are abilities you’ve developed through
-              different experiences that can be valuable in other jobs or work
-              environments. For example, assisting customers can develop
-              communication and problem-solving skills, while organizing family
-              schedules, coordinating volunteer activities, or managing daily
-              responsibilities can strengthen planning and organizational
-              skills.
-            </p>
-            <p>
-              You don’t need previous office experience to have skills that may
-              be useful in an office-based career.
-            </p>
-          </section>
+          <p class="intro-note">
+            <strong>No previous office experience is required to get started.</strong>
+          </p>
           <a class="button-link" href="#questionnaire">Explore your options</a>
         </div>
         <svg
@@ -142,7 +129,7 @@
             <span class="step-number" aria-hidden="true">1</span>
             <h3>Tell us about yourself</h3>
             <p>
-              Answer seven short questions about your experiences and
+              Answer eight short questions about your experiences and
               preferences. Explore how skills developed through work,
               education, volunteering, and everyday responsibilities may
               connect to new career opportunities.
@@ -184,15 +171,15 @@
         <form id="intake-form" class="intake-form" novalidate>
           <div class="progress-block">
             <p id="progress-label" class="progress-label" role="status">
-              Question 1 of 7
+              Question 1 of 8
             </p>
             <progress
               id="question-progress"
-              max="7"
+              max="8"
               value="1"
               aria-labelledby="progress-label"
             >
-              Question 1 of 7
+              Question 1 of 8
             </progress>
           </div>
 
@@ -210,22 +197,23 @@
             <label class="answer-option"><input type="checkbox" name="occupations" value="agriculture" /><span>Farm, crop, or greenhouse work</span></label>
             <label class="answer-option"><input type="checkbox" name="occupations" value="caregiving" /><span>Home/personal care aide or caregiver (paid or unpaid)</span></label>
             <label class="answer-option"><input type="checkbox" name="occupations" value="childcare" /><span>Childcare worker or provider (paid or unpaid)</span></label>
+            <label class="answer-option"><input type="checkbox" name="occupations" value="family-care" /><span>Stay-at-home parenting or unpaid family caregiving</span></label>
             <label class="answer-option"><input type="checkbox" name="occupations" value="other" /><span>Other work or unpaid responsibilities, including homemaking, self-employment, or informal work</span></label>
             <label class="answer-option"><input type="checkbox" name="occupations" value="none" data-exclusive-option /><span>None of these / not sure</span></label>
           </fieldset>
 
           <fieldset data-question-step>
             <legend tabindex="-1">2. Which of these activities have you done before? Select all that apply.</legend>
-            <p class="question-help">Think about any setting, not only an office.</p>
-            <label class="answer-option"><input type="checkbox" name="activities" value="calls-visitors" /><span>Answered or routed calls, took messages, or greeted/directed visitors</span></label>
-            <label class="answer-option"><input type="checkbox" name="activities" value="explain-resolve" /><span>Answered questions, explained instructions or next steps, or helped resolve a problem</span></label>
-            <label class="answer-option"><input type="checkbox" name="activities" value="scheduling" /><span>Scheduled or confirmed appointments, meetings, or deliveries</span></label>
-            <label class="answer-option"><input type="checkbox" name="activities" value="enter-check-records" /><span>Entered or checked information in forms or records</span></label>
-            <label class="answer-option"><input type="checkbox" name="activities" value="organize-documents" /><span>Filed, scanned, organized, or retrieved documents or records</span></label>
-            <label class="answer-option"><input type="checkbox" name="activities" value="prepare-documents" /><span>Prepared or edited emails, letters, forms, or reports</span></label>
-            <label class="answer-option"><input type="checkbox" name="activities" value="team-coordination" /><span>Shared updates with coworkers or coordinated tasks with a team</span></label>
-            <label class="answer-option"><input type="checkbox" name="activities" value="payments" /><span>Handled invoices, payments, or receipts, or checked totals</span></label>
-            <label class="answer-option"><input type="checkbox" name="activities" value="track-supplies" /><span>Tracked or counted supplies, products, or inventory, and reported low or missing items</span></label>
+            <p class="question-help">Think about things you've done in paid work, volunteering, or responsibilities at home. Select only activities you've actually done.</p>
+            <label class="answer-option"><input type="checkbox" name="activities" value="calls-visitors" /><span>Welcomed or directed people, took a message, or passed a question to someone who could help</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="explain-resolve" /><span>Helped people with questions, explained what to do, or solved problems</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="scheduling" /><span>Organized schedules, appointments, activities, or deliveries</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="enter-check-records" /><span>Filled out forms, checked information, or kept track of important details</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="organize-documents" /><span>Sorted, put away, or found papers, forms, or records when needed</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="prepare-documents" /><span>Wrote or updated notes, messages, instructions, or reports</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="team-coordination" /><span>Worked with others to organize tasks, share updates, or get things done</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="payments" /><span>Counted money, handled payments, or checked totals</span></label>
+            <label class="answer-option"><input type="checkbox" name="activities" value="track-supplies" /><span>Kept track of supplies, products, or things that needed replacing</span></label>
             <label class="answer-option"><input type="checkbox" name="activities" value="none" data-exclusive-option /><span>None of these / not sure</span></label>
           </fieldset>
 
@@ -247,10 +235,10 @@
             </fieldset>
             <fieldset class="question-subgroup">
               <legend>How comfortable do you feel using technology for work tasks?</legend>
-              <label class="answer-option"><input type="radio" name="technologyComfort" value="little" /><span>I have little or no experience with office computer tasks</span></label>
-              <label class="answer-option"><input type="radio" name="technologyComfort" value="guided" /><span>I can do some common tasks with help</span></label>
-              <label class="answer-option"><input type="radio" name="technologyComfort" value="independent" /><span>I can do common tasks on my own</span></label>
-              <label class="answer-option"><input type="radio" name="technologyComfort" value="learning" /><span>I feel comfortable learning new technology</span></label>
+              <label class="answer-option"><input type="radio" name="technologyComfort" value="little" /><span>I have little or no experience using a computer for work</span></label>
+              <label class="answer-option"><input type="radio" name="technologyComfort" value="guided" /><span>I can do basic computer tasks with help</span></label>
+              <label class="answer-option"><input type="radio" name="technologyComfort" value="independent" /><span>I can do common computer tasks on my own</span></label>
+              <label class="answer-option"><input type="radio" name="technologyComfort" value="learning" /><span>I feel comfortable learning new technology for work</span></label>
             </fieldset>
           </fieldset>
 
@@ -269,7 +257,18 @@
           </fieldset>
 
           <fieldset data-question-step>
-            <legend tabindex="-1">5. How open are you to learning skills for a new kind of job?</legend>
+            <legend tabindex="-1">5. How would you describe your current English skills?</legend>
+            <p class="question-help">This question is optional. Your answer only helps us suggest English-learning resources and does not affect career matches.</p>
+            <label class="answer-option"><input type="radio" name="englishSupport" value="beginning" /><span><strong>Beginning:</strong> I'm just starting to learn English and understand or speak only a little.</span></label>
+            <label class="answer-option"><input type="radio" name="englishSupport" value="basic" /><span><strong>Basic:</strong> I can understand and use some everyday English, but need more practice.</span></label>
+            <label class="answer-option"><input type="radio" name="englishSupport" value="intermediate" /><span><strong>Intermediate:</strong> I can communicate in everyday situations but would like to improve my English for work.</span></label>
+            <label class="answer-option"><input type="radio" name="englishSupport" value="advanced" /><span><strong>Advanced:</strong> I'm comfortable communicating in English but would like to strengthen my professional English.</span></label>
+            <label class="answer-option"><input type="radio" name="englishSupport" value="no-support" /><span>I don't need English-language support</span></label>
+            <label class="answer-option"><input type="radio" name="englishSupport" value="prefer-not" /><span>Prefer not to answer</span></label>
+          </fieldset>
+
+          <fieldset data-question-step>
+            <legend tabindex="-1">6. How open are you to learning skills for a new kind of job?</legend>
             <label class="answer-option"><input type="radio" name="trainingInterest" value="short-practice" /><span>Open to short lessons or free practice</span></label>
             <label class="answer-option"><input type="radio" name="trainingInterest" value="structured-course" /><span>Would consider a certificate or structured course</span></label>
             <label class="answer-option"><input type="radio" name="trainingInterest" value="extended-training" /><span>Could spend more time training if the career seems right</span></label>
@@ -279,7 +278,7 @@
           </fieldset>
 
           <fieldset data-question-step>
-            <legend tabindex="-1">6. What would you prefer in your next work setting? Select all that matter.</legend>
+            <legend tabindex="-1">7. What would you prefer in your next work setting? Select all that matter.</legend>
             <label class="answer-option"><input type="checkbox" name="environment" value="indoors" /><span>Mostly indoors</span></label>
             <label class="answer-option"><input type="checkbox" name="environment" value="less-physical" /><span>Less lifting or heavy physical work</span></label>
             <label class="answer-option"><input type="checkbox" name="environment" value="desk" /><span>Mostly desk/computer work</span></label>
@@ -292,7 +291,7 @@
           </fieldset>
 
           <fieldset data-question-step>
-            <legend tabindex="-1">7. What matters most as you consider a new career? Choose up to three.</legend>
+            <legend tabindex="-1">8. What matters most as you consider a new career? Choose up to three.</legend>
             <p class="question-help">“Not sure yet” is a choice by itself.</p>
             <label class="answer-option"><input type="checkbox" name="priorities" value="pay" /><span>Better pay potential than previous/current work</span></label>
             <label class="answer-option"><input type="checkbox" name="priorities" value="predictable-hours" /><span>More predictable hours</span></label>
@@ -351,6 +350,27 @@
             Start over
           </button>
         </div>
+        <section id="result-tools" class="result-tools" aria-labelledby="result-tools-title" hidden>
+          <h3 id="result-tools-title">Print, save, or share your results</h3>
+          <div class="result-scope-control">
+            <label for="results-scope">Results to print or share</label>
+            <select id="results-scope">
+              <option value="complete">Complete results</option>
+              <option value="selected">Selected careers only</option>
+            </select>
+          </div>
+          <fieldset id="career-scope-options" class="career-scope-options" hidden>
+            <legend>Select career results to include</legend>
+            <div id="career-scope-list" class="career-scope-list"></div>
+          </fieldset>
+          <div class="result-tool-actions">
+            <button id="print-results" class="button-secondary" type="button">Print results</button>
+            <button id="save-pdf" class="button-secondary" type="button">Save as PDF</button>
+            <button id="share-results" class="button-secondary" type="button">Share results</button>
+          </div>
+          <p id="result-action-status" class="result-action-status" role="status" aria-live="polite"></p>
+          <p class="result-tool-note">Save as PDF opens your browser's print dialog; choose “Save as PDF” there.</p>
+        </section>
       </section>
 
       <section
@@ -371,6 +391,12 @@
               to a server. Your answers remain available until you restart,
               refresh, or close the page. External resource websites do not
               receive your questionnaire answers.
+            </p>
+            <p>
+              Sharing is optional. If you choose Share Results, the browser
+              shares or copies the result text after your click; the text may
+              reflect your answers and is sent only to the destination you
+              choose.
             </p>
           </section>
           <section aria-labelledby="results-details-title">

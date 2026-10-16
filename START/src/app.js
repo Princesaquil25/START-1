@@ -19,6 +19,7 @@ const questionGroups = [
   },
   { name: "technologyComfort", multiple: false, required: true },
   { name: "education", multiple: false, required: true },
+  { name: "englishSupport", multiple: false, required: false },
   { name: "trainingInterest", multiple: false, required: true },
   {
     name: "environment",
@@ -40,6 +41,7 @@ const questionSteps = [
   ["activities"],
   ["technologyTools", "technologyComfort"],
   ["education"],
+  ["englishSupport"],
   ["trainingInterest"],
   ["environment"],
   ["priorities"],
@@ -54,6 +56,11 @@ const careerData =
       };
 const careerProfiles = careerData.careerRecords;
 const matchingRules = careerData.careerMatchingData;
+const connectionGroupByFamily = new Map(
+  Object.entries(matchingRules.connectionGroups).flatMap(
+    ([groupId, group]) => group.families.map((family) => [family, groupId]),
+  ),
+);
 
 const technologyToolLabels = {
   smartphone: "a smartphone or tablet",
@@ -66,55 +73,12 @@ const technologyToolLabels = {
   "inventory-system": "an inventory or order system",
 };
 
-const comfortGuidance = {
-  little: "You could start with guided practice in the office tools relevant to this role. This answer does not reduce your transferable-skill match.",
-  guided: "Practice the role’s common office tasks step by step; the learning resources below are optional starting points.",
-  independent: "You can build on your current comfort by practicing any employer-specific tools named in local postings.",
-  learning: "Your comfort learning technology can help as you explore the tools used by a particular employer.",
-};
-
-const educationGuidance = {
-  "no-credential":
-    "Some entry-level office postings ask for a high school diploma or equivalent, while requirements vary. If a role you want lists one, a local library or workforce center may help you explore options.",
-  "some-high-school":
-    "Check whether local postings for this role require a high school diploma or equivalent. A library or workforce center may explain adult education options if helpful.",
-  "high-school":
-    "A high school diploma or equivalent is typical for many entry-level office roles, but each employer sets its own requirements.",
-  "some-college":
-    "Some college coursework may be useful background; review each employer’s stated education and experience requirements.",
-  certificate:
-    "Your completed certificate, license, or vocational training may be relevant background. Check whether a particular employer asks for a specific credential.",
-  apprenticeship:
-    "Your apprenticeship or workplace training may provide relevant experience. Employer-specific education, software, or system requirements can still vary.",
-  associate:
-    "Your degree may provide relevant preparation, but employers may still ask for particular software skills or experience.",
-  bachelor:
-    "Your degree may provide relevant preparation, but employers may still ask for particular software skills or experience.",
-  unsure:
-    "This result does not assess education eligibility. Review the requirements in any local postings you choose to explore.",
-};
-
-const trainingGuidance = {
-  "short-practice":
-    "Short lessons and the free resources below may be a practical first step; certificates are not assumed to be required.",
-  "structured-course":
-    "Compare any course with local employer requirements before enrolling; requirements vary and a certificate is not universal.",
-  "extended-training":
-    "If you decide to pursue more preparation, first compare local postings and training options for this specific role.",
-  "learn-on-job":
-    "Look for postings that describe employer-provided training, and check which skills they expect before starting.",
-  unsure:
-    "You can explore the optional resources below before deciding whether more training would be useful.",
-  "not-now":
-    "The learning resources below are optional. You can begin by comparing role duties and employer requirements.",
-};
-
 const answerLabels = {
   technologyComfort: {
-    little: "I have little or no experience with office computer tasks",
-    guided: "I can do some common tasks with help",
-    independent: "I can do common tasks on my own",
-    learning: "I feel comfortable learning new technology",
+    little: "I have little or no experience using a computer for work",
+    guided: "I can do basic computer tasks with help",
+    independent: "I can do common computer tasks on my own",
+    learning: "I feel comfortable learning new technology for work",
   },
   education: {
     "no-credential": "No formal credential yet",
@@ -126,6 +90,14 @@ const answerLabels = {
     associate: "Associate degree",
     bachelor: "Bachelor’s degree or higher",
     unsure: "Not sure / prefer not to answer",
+  },
+  englishSupport: {
+    beginning: "Beginning",
+    basic: "Basic",
+    intermediate: "Intermediate",
+    advanced: "Advanced",
+    "no-support": "I don't need English-language support",
+    "prefer-not": "Prefer not to answer",
   },
   trainingInterest: {
     "short-practice": "Open to short lessons or free practice",
@@ -147,6 +119,13 @@ const environmentLabels = {
   team: "working with a team",
   onsite: "on-site work",
 };
+
+const englishSupportLevels = new Set([
+  "beginning",
+  "basic",
+  "intermediate",
+  "advanced",
+]);
 
 const priorityLabels = {
   pay: "better pay potential",
@@ -191,9 +170,10 @@ function getAllowedAnswers(groupName) {
     ],
     activities: [...Object.keys(matchingRules.activities), "none"],
     technologyTools: [...Object.keys(technologyToolLabels), "none", "unsure"],
-    technologyComfort: Object.keys(comfortGuidance),
+    technologyComfort: Object.keys(answerLabels.technologyComfort),
     education: Object.keys(answerLabels.education),
-    trainingInterest: Object.keys(trainingGuidance),
+    englishSupport: Object.keys(answerLabels.englishSupport),
+    trainingInterest: Object.keys(answerLabels.trainingInterest),
     environment: [...Object.keys(environmentLabels), "unsure"],
     priorities: [...Object.keys(priorityLabels), "unsure"],
   };
@@ -256,9 +236,18 @@ function buildSkillEvidence(answersByGroup) {
     if (!occupation) {
       continue;
     }
-    const source = { value, label: occupation.label, taskBasis: occupation.taskBasis };
+    const source = {
+      value,
+      label: occupation.label,
+      taskBasis: occupation.taskBasis,
+    };
     for (const family of occupation.skills) {
-      addEvidence(family, "potential", source);
+      const groupId = connectionGroupByFamily.get(family);
+      addEvidence(family, "potential", {
+        ...source,
+        connectionText:
+          occupation.connectionTexts?.[groupId] || occupation.connectionText,
+      });
     }
   }
 
@@ -267,7 +256,11 @@ function buildSkillEvidence(answersByGroup) {
     if (!activity) {
       continue;
     }
-    const source = { value, label: activity.label };
+    const source = {
+      value,
+      label: activity.label,
+      connectionText: activity.connectionText,
+    };
     for (const family of activity.skills) {
       addEvidence(family, "confirmed", source);
     }
@@ -365,41 +358,51 @@ function getAnswerLabel(form, groupName, value) {
 }
 
 function getMatchExplanation(match) {
-  const confirmed = match.skillEvidence.filter(
-    ({ confirmedSources }) => confirmedSources.length > 0,
-  );
-  const potential = match.skillEvidence.filter(
-    ({ confirmedSources, potentialSources }) =>
-      confirmedSources.length === 0 && potentialSources.length > 0,
-  );
-  const overlappingPotential = confirmed.some(
-    ({ potentialSources }) => potentialSources.length > 0,
-  );
   const statements = [];
+  const confirmedActivities = [
+    ...new Map(
+      match.skillEvidence
+        .flatMap(({ confirmedSources }) => confirmedSources)
+        .map((source) => [source.value, source]),
+    ).values(),
+  ];
+  const potentialOccupations = [
+    ...new Map(
+      match.skillEvidence
+        .flatMap(({ potentialSources }) => potentialSources)
+        .map((source) => [source.value, source]),
+    ).values(),
+  ];
 
-  if (confirmed.length > 0) {
+  if (confirmedActivities.length > 0) {
     statements.push(
-      `You confirmed doing activities related to ${joinReadable(
-        confirmed
-          .map(({ family }) => matchingRules.skillLabels[family]),
-      )}.`,
+      `Your confirmed experience with ${joinReadable(
+        confirmedActivities
+          .map(({ connectionText }) => connectionText)
+          .filter(Boolean)
+          .slice(0, 2),
+      )} could support similar tasks in this career.`,
     );
   }
-  if (potential.length > 0) {
+  if (potentialOccupations.length > 0) {
+    const possibleTasks = [
+      ...new Set(
+        match.skillEvidence
+          .flatMap(({ potentialSources }) => potentialSources)
+          .map(({ connectionText }) => connectionText)
+          .filter(Boolean),
+      ),
+    ].slice(0, 2);
     statements.push(
-      `Typical tasks in selected work backgrounds may also involve ${joinReadable(
-        potential
-          .map(({ family }) => matchingRules.skillLabels[family]),
-      )}; this is a possible connection, not a confirmed task.`,
+      `Work backgrounds such as ${joinReadable(
+        potentialOccupations.map(({ label }) => label),
+      )} may involve tasks such as ${joinReadable(
+        possibleTasks,
+      )}; if those tasks reflect your experience, they may also be useful here.`,
     );
   }
-  if (overlappingPotential) {
-    statements.push("Overlapping skill areas are counted once.");
-  }
 
-  return `This role may be worth exploring. ${statements.join(
-    " ",
-  )} These connections are not a formal skills assessment or a guarantee of job readiness.`;
+  return statements.join(" ");
 }
 
 function getPreferenceExplanation(answersByGroup, career) {
@@ -415,7 +418,7 @@ function getPreferenceExplanation(answersByGroup, career) {
   ]);
 
   if (alignedPreferences.size === 0) {
-    return "Your preferences were considered after transferable-skill evidence. Actual duties and working conditions vary by employer.";
+    return "Your work preferences were considered alongside the experience suggested by your answers. Duties and working conditions vary by employer.";
   }
 
   const alignedLabels = [...alignedPreferences].map(
@@ -423,7 +426,7 @@ function getPreferenceExplanation(answersByGroup, career) {
   );
   return `Your preferences for ${joinReadable(
     alignedLabels,
-  )} may align with this path. Preferences were used to refine skill-based matches; actual duties and working conditions vary by employer.`;
+  )} may fit this role. Actual duties and working conditions vary by employer.`;
 }
 
 function appendListSection(container, headingText, items) {
@@ -457,45 +460,116 @@ function appendParagraphSection(container, headingText, paragraphText) {
   container.append(section);
 }
 
+function getTransferableSkillConnections(match, career) {
+  const groupedEvidence = new Map();
+
+  for (const evidence of match.skillEvidence) {
+    const groupId = connectionGroupByFamily.get(evidence.family);
+    if (!groupId) {
+      continue;
+    }
+    if (!groupedEvidence.has(groupId)) {
+      groupedEvidence.set(groupId, {
+        groupId,
+        confirmedSources: [],
+        potentialSources: [],
+      });
+    }
+    const group = groupedEvidence.get(groupId);
+    for (const source of evidence.confirmedSources) {
+      if (!group.confirmedSources.some((existing) => existing.value === source.value)) {
+        group.confirmedSources.push(source);
+      }
+    }
+    for (const source of evidence.potentialSources) {
+      if (!group.potentialSources.some((existing) => existing.value === source.value)) {
+        group.potentialSources.push(source);
+      }
+    }
+  }
+
+  return [...groupedEvidence.values()]
+    .map((evidence) => {
+      const connectionUse = career.connectionUses[evidence.groupId];
+      if (!connectionUse) {
+        throw new Error(
+          `Missing career connection wording for "${career.id}" and "${evidence.groupId}".`,
+        );
+      }
+
+      const confirmedActions = [
+        ...new Set(
+          evidence.confirmedSources
+            .map(({ connectionText }) => connectionText)
+            .filter(Boolean),
+        ),
+      ].slice(0, 2);
+      const potentialSources = evidence.potentialSources.slice(0, 2);
+      const potentialActions = [
+        ...new Set(
+          potentialSources
+            .map(({ connectionText }) => connectionText)
+            .filter(Boolean),
+        ),
+      ];
+      let text;
+
+      if (confirmedActions.length > 0 && potentialSources.length > 0) {
+        text = `You've confirmed ${joinReadable(
+          confirmedActions,
+        )}; work backgrounds such as ${joinReadable(
+          potentialSources.map(({ label }) => label),
+        )} may also include tasks like ${joinReadable(
+          potentialActions,
+        )}. These experiences may be useful for ${connectionUse}.`;
+      } else if (confirmedActions.length > 0) {
+        text = `You've confirmed ${joinReadable(
+          confirmedActions,
+        )}. That experience may be useful for ${connectionUse}.`;
+      } else {
+        text = `Some people with backgrounds such as ${joinReadable(
+          potentialSources.map(({ label }) => label),
+        )} may have done tasks like ${joinReadable(
+          potentialActions,
+        )}. If that reflects your experience, it may be useful for ${connectionUse}.`;
+      }
+
+      return {
+        label: matchingRules.connectionGroups[evidence.groupId].label,
+        text,
+        confirmedCount: evidence.confirmedSources.length,
+        potentialCount: evidence.potentialSources.length,
+      };
+    })
+    .sort(
+      (first, second) =>
+        second.confirmedCount - first.confirmedCount ||
+        second.potentialCount - first.potentialCount,
+    )
+    .slice(0, 4);
+}
+
 function appendEvidenceSection(container, match) {
   const section = document.createElement("section");
   section.className = "career-detail-section";
   const heading = document.createElement("h4");
-  heading.textContent = "Transferable-skill connections from your answers";
+  heading.textContent = "How your transferable skills connect to this career.";
   const list = document.createElement("ul");
 
-  for (const evidence of match.skillEvidence) {
+  for (const connection of getTransferableSkillConnections(match, match.career)) {
     const item = document.createElement("li");
     const family = document.createElement("strong");
-    family.textContent = `${matchingRules.skillLabels[evidence.family]}: `;
-    item.append(family);
-
-    const sources = [];
-    if (evidence.confirmedSources.length > 0) {
-      const confirmed = document.createElement("span");
-      confirmed.textContent = `Activity you said you have done: ${evidence.confirmedSources
-        .map(({ label }) => label)
-        .join("; ")}. This confirms the activity, not a formal skill rating.`;
-      sources.push(confirmed);
-    }
-    if (evidence.potentialSources.length > 0) {
-      const potential = document.createElement("span");
-      potential.textContent = `Potential connection from selected work: ${evidence.potentialSources
-        .map(({ label, taskBasis }) => `${label} — ${taskBasis}`)
-        .join("; ")} These are typical occupational tasks and may not describe your own duties.`;
-      sources.push(potential);
-    }
-
-    sources.forEach((source, index) => {
-      if (index > 0) {
-        item.append(document.createTextNode(" "));
-      }
-      item.append(source);
-    });
+    family.textContent = `${connection.label}: `;
+    item.append(family, document.createTextNode(connection.text));
     list.append(item);
   }
 
   section.append(heading, list);
+  const context = document.createElement("p");
+  context.className = "link-detail";
+  context.textContent =
+    "Work-background connections draw on typical job responsibilities and may not reflect every person's individual experience.";
+  section.append(context);
   const occupationalSources = new Map();
   for (const evidence of match.skillEvidence) {
     for (const source of evidence.potentialSources.flatMap(
@@ -526,60 +600,166 @@ function appendEvidenceSection(container, match) {
   container.append(section);
 }
 
-function getPreparationNotes(answersByGroup, career) {
-  const notes = [];
-  const comfort = answersByGroup.technologyComfort[0];
-  const comfortLabel = answerLabels.technologyComfort[comfort];
-  const comfortMessage =
-    comfortGuidance[comfort] || comfortGuidance.little;
-
-  notes.push(`Technology comfort: ${comfortLabel}. ${comfortMessage}`);
-
-  const selectedTools = answersByGroup.technologyTools.filter(
-    (value) => !["none", "unsure"].includes(value),
-  );
-  if (selectedTools.length > 0) {
-    notes.push(
-      `You selected experience with ${selectedTools
-        .map((value) => technologyToolLabels[value])
-        .join(", ")}. Employer-specific systems may differ.`,
-    );
-  }
-
-  const toolValuesByNeed = {
+const toolValuesByNeed = {
     email: "email",
     documents: "documents",
     spreadsheets: "spreadsheets",
     calendar: "calendar",
     "online-records": "online-records",
   };
-  const unselectedNeeds = career.technologyNeeds.filter(
-    (need) => !selectedTools.includes(toolValuesByNeed[need]),
+
+function getMissingTechnologyNeeds(answersByGroup, career) {
+  const selectedTools = (answersByGroup.technologyTools || []).filter(
+    (value) => !["none", "unsure"].includes(value),
   );
-  if (unselectedNeeds.length > 0) {
-    notes.push(
-      `Tools that may be useful to practice for this path include ${unselectedNeeds
-        .map((need) => technologyToolLabels[toolValuesByNeed[need]])
-        .join(", ")}. You did not select these as tools you have used; that is not a skills judgment.`,
+  return career.technologyNeeds.filter(
+    (need) =>
+      toolValuesByNeed[need] &&
+      !selectedTools.includes(toolValuesByNeed[need]),
+  );
+}
+
+function getPreparationResources(answersByGroup, career) {
+  const resources = [...career.resources];
+  const education = answersByGroup.education?.[0];
+
+  if (
+    career.highSchoolEquivalentCommon &&
+    ["no-credential", "some-high-school"].includes(education)
+  ) {
+    resources.push(...matchingRules.preparationResources.ged);
+  }
+
+  const englishLevel = answersByGroup.englishSupport?.[0];
+  if (englishSupportLevels.has(englishLevel)) {
+    const englishResources =
+      matchingRules.preparationResources.english;
+    const englishCourseDetails = {
+      beginning:
+        "Start with beginner lessons in these free online English courses.",
+      basic:
+        "Build everyday English with free self-paced beginner and intermediate lessons.",
+      intermediate:
+        "Practice with the intermediate lessons in these free online English courses.",
+    };
+    resources.push(
+      ...(englishLevel === "advanced"
+        ? englishResources.filter(({ url }) =>
+            url.includes("/english-conversation-tips/"),
+          )
+        : englishResources).map((resource) =>
+        resource.url === "https://www.usalearns.org/"
+          ? { ...resource, detail: englishCourseDetails[englishLevel] }
+          : resource,
+      ),
     );
   }
 
-  const educationLabel = answerLabels.education[answersByGroup.education[0]];
-  notes.push(
-    `Education or training you selected: ${educationLabel}. ${
-      educationGuidance[answersByGroup.education[0]]
-    }`,
-  );
+  const missingNeeds = getMissingTechnologyNeeds(answersByGroup, career);
+  if (
+    missingNeeds.length > 0 ||
+    ["little", "guided"].includes(answersByGroup.technologyComfort?.[0])
+  ) {
+    const relevantNeeds =
+      missingNeeds.length > 0
+        ? missingNeeds
+        : career.technologyNeeds;
+    for (const need of relevantNeeds) {
+      const resource = matchingRules.preparationResources.computer[need];
+      if (resource) {
+        resources.push(resource);
+      }
+    }
+  }
 
-  const trainingChoice = answersByGroup.trainingInterest[0];
-  const trainingLabel = answerLabels.trainingInterest[trainingChoice];
-  notes.push(
-    `Training preference: ${trainingLabel}. ${
-      trainingGuidance[trainingChoice] || trainingGuidance.unsure
-    }`,
-  );
+  return [...new Map(resources.map((resource) => [resource.url, resource])).values()];
+}
 
-  notes.push(career.preparationNote);
+function getPreparationNotes(answersByGroup, career, match) {
+  const notes = [];
+  const missingNeeds = getMissingTechnologyNeeds(answersByGroup, career);
+  const comfort = answersByGroup.technologyComfort?.[0];
+  const practiceNeeds =
+    missingNeeds.length > 0
+      ? missingNeeds
+      : ["little", "guided"].includes(comfort)
+        ? career.technologyNeeds.slice(0, 2)
+        : [];
+
+  if (practiceNeeds.length > 0) {
+    const toolNames = practiceNeeds
+      .map((need) => technologyToolLabels[toolValuesByNeed[need]])
+      .filter(Boolean);
+    const startingPoint =
+      comfort === "little"
+        ? "Start with a guided beginner lesson"
+        : comfort === "guided"
+          ? "Practice these tasks step by step"
+          : "Try practicing these tools";
+    notes.push(
+      `${startingPoint}: ${joinReadable(toolNames)}. Free learning links are below.`,
+    );
+  }
+
+  const education = answersByGroup.education?.[0];
+  if (
+    career.highSchoolEquivalentCommon &&
+    ["no-credential", "some-high-school"].includes(education)
+  ) {
+    notes.push(
+      "Some employers commonly ask for a high school diploma or equivalent. Check local postings and, if useful, explore adult-education or GED preparation options below.",
+    );
+  }
+
+  const englishPreparationMessages = {
+    beginning:
+      "Start with the beginner English lessons and everyday conversation tips below.",
+    basic:
+      "Build everyday English with the self-paced lessons and conversation tips below.",
+    intermediate:
+      "Explore the intermediate lessons and conversation practice below.",
+    advanced:
+      "The available free resource focuses on everyday conversation practice; we don't list an advanced-specific English course.",
+  };
+  const englishMessage =
+    englishPreparationMessages[answersByGroup.englishSupport?.[0]];
+  if (englishMessage) {
+    notes.push(englishMessage);
+  }
+
+  const trainingChoice = answersByGroup.trainingInterest?.[0];
+  const trainingMessages = {
+    "structured-course":
+      "Before enrolling in a course, compare its content and cost with requirements in local job postings; a certificate is not universal.",
+    "extended-training":
+      "Before committing to longer training, compare local job postings and training options for this specific role.",
+    "learn-on-job":
+      "Look for postings that mention on-the-job training, and check which skills employers expect before starting.",
+    unsure:
+      "You can use the free resources below to explore the work before deciding whether more training would help.",
+  };
+  if (trainingMessages[trainingChoice]) {
+    notes.push(trainingMessages[trainingChoice]);
+  }
+
+  const confirmedFamilies = new Set(
+    (match?.skillEvidence || [])
+      .filter(({ confirmedSources }) => confirmedSources.length > 0)
+      .map(({ family }) => family),
+  );
+  if (!confirmedFamilies.has(career.preparationTask.family)) {
+    notes.push(career.preparationTask.text);
+  } else {
+    const confirmedActivity = (match?.skillEvidence || [])
+      .flatMap(({ confirmedSources }) => confirmedSources)
+      .find(({ connectionText }) => connectionText);
+    if (confirmedActivity) {
+      notes.push(
+        `For your resume or an interview, prepare a brief example of ${confirmedActivity.connectionText}; include only details you personally handled.`,
+      );
+    }
+  }
+
   return notes;
 }
 
@@ -660,6 +840,7 @@ function appendLinksSection(container, headingText, links, includeCost) {
 function createRecommendationCard(form, match, index) {
   const item = document.createElement("li");
   item.className = "recommendation-card";
+  item.dataset.careerId = match.career.id;
   const article = document.createElement("article");
 
   if (index === 0) {
@@ -669,35 +850,20 @@ function createRecommendationCard(form, match, index) {
     star.className = "top-match-star";
     star.setAttribute("aria-hidden", "true");
     star.textContent = "★";
-    topMatch.append(star, document.createTextNode(" Strongest skill-evidence match"));
+    topMatch.append(star, document.createTextNode(" Closest match to your experience"));
     article.append(topMatch);
   }
 
   const title = document.createElement("h3");
   title.textContent = match.career.title;
 
-  const score = document.createElement("p");
-  score.className = "recommendation-score";
-  score.textContent = `${match.confirmedSkillCount} personally confirmed skill area${
-    match.confirmedSkillCount === 1 ? "" : "s"
-  } and ${match.potentialSkillCount} potential work-background skill area${
-    match.potentialSkillCount === 1 ? "" : "s"
-  }`;
-
-  const scoreNote = document.createElement("p");
-  scoreNote.className = "score-note";
-  scoreNote.textContent =
-    "Each skill family is counted once. Occupational task connections are potential, while Question 2 activities are experiences you confirmed; neither is a formal qualification or job-readiness rating.";
-
+  const answersByGroup = getAnswersByGroup(form);
   const explanation = document.createElement("p");
   explanation.className = "recommendation-reason";
   explanation.textContent = getMatchExplanation(match);
   const preference = document.createElement("p");
   preference.className = "recommendation-preference";
-  preference.textContent = getPreferenceExplanation(
-    getAnswersByGroup(form),
-    match.career,
-  );
+  preference.textContent = getPreferenceExplanation(answersByGroup, match.career);
 
   const details = document.createElement("details");
   details.className = "career-details";
@@ -705,7 +871,18 @@ function createRecommendationCard(form, match, index) {
   summary.textContent = "Explore responsibilities, skills, and next steps";
   const detailContent = document.createElement("div");
   detailContent.className = "career-details-content";
-
+  const printButton = document.createElement("button");
+  printButton.className = "button-secondary career-print-action";
+  printButton.type = "button";
+  printButton.textContent = "Print or save this career";
+  printButton.setAttribute(
+    "aria-label",
+    `Print or save details for ${match.career.title}`,
+  );
+  printButton.addEventListener("click", () =>
+    printCareerDetails(match.career.id),
+  );
+  detailContent.append(printButton);
   appendEvidenceSection(detailContent, match);
   appendParagraphSection(
     detailContent,
@@ -725,8 +902,8 @@ function createRecommendationCard(form, match, index) {
   );
   appendListSection(
     detailContent,
-    "Preparation suggestions based on your answers",
-    getPreparationNotes(getAnswersByGroup(form), match.career),
+    "How to prepare for this career.",
+    getPreparationNotes(answersByGroup, match.career, match),
   );
   appendTransferableSkills(detailContent, match.career.transferableSkills);
   appendListSection(
@@ -742,7 +919,7 @@ function createRecommendationCard(form, match, index) {
   appendLinksSection(
     detailContent,
     "Free learning resources (optional)",
-    match.career.resources,
+    getPreparationResources(answersByGroup, match.career),
     true,
   );
   appendListSection(
@@ -754,21 +931,271 @@ function createRecommendationCard(form, match, index) {
   appendLinksSection(detailContent, "Occupational sources", match.career.sources, false);
 
   details.append(summary, detailContent);
-  article.append(title, score, scoreNote, explanation, preference, details);
+  article.append(title, explanation, preference, details);
   item.append(article);
   return item;
 }
 
+function getScopedMatches(matches, scope, selectedCareerIds) {
+  if (scope === "complete") {
+    return matches;
+  }
+  if (scope !== "selected") {
+    throw new RangeError(`Unsupported result scope "${scope}".`);
+  }
+  const selected = new Set(selectedCareerIds);
+  return matches.filter(({ career }) => selected.has(career.id));
+}
+
+function buildShareText(matches, answersByGroup, scope, selectedCareerIds) {
+  const includedMatches = getScopedMatches(
+    matches,
+    scope,
+    selectedCareerIds,
+  );
+  if (includedMatches.length === 0) {
+    return "";
+  }
+
+  const formatSection = (heading, items) =>
+    `${heading}\n${items.map((item) => `- ${item}`).join("\n")}`;
+  const careerSections = includedMatches.map(({ career, ...match }) => {
+    const fullMatch = { ...match, career };
+    const sections = [
+      career.description,
+      formatSection("Typical responsibilities", career.responsibilities),
+      formatSection("Common skills", career.skills),
+      `Typical entry-level preparation\n${career.qualifications}`,
+      formatSection(
+        "How your transferable skills connect to this career",
+        getTransferableSkillConnections(fullMatch, career).map(
+          ({ label, text }) => `${label}: ${text}`,
+        ),
+      ),
+      formatSection(
+        "How to prepare for this career",
+        getPreparationNotes(answersByGroup, career, fullMatch),
+      ),
+      formatSection(
+        "Examples of related experience",
+        career.transferableSkills.map(
+          ({ background, example }) => `${background}: ${example}`,
+        ),
+      ),
+      formatSection("Skills you could develop", career.developSkills),
+      formatSection("Other job titles to search", career.alternativeTitles),
+      formatSection(
+        "Free learning resources (optional)",
+        getPreparationResources(answersByGroup, career).map(
+          ({ name, detail, url }) => `${name}: ${detail} (${url})`,
+        ),
+      ),
+      formatSection("Practical next steps", career.nextSteps),
+      `Potential career pathway\n${career.careerPathway.join(" > ")}`,
+      formatSection(
+        "Occupational sources",
+        career.sources.map(({ name, url }) => `${name}: ${url}`),
+      ),
+    ];
+    return `Career: ${career.title}\n${getMatchExplanation(fullMatch)}\n${getPreferenceExplanation(
+      answersByGroup,
+      career,
+    )}\n\n${sections.join("\n\n")}`;
+  });
+
+  return [
+    "Career Pathway Explorer results",
+    "These suggestions are for exploration and do not guarantee employment, salary improvement, or advancement.",
+    careerSections.join("\n\n---\n\n"),
+  ].join("\n\n");
+}
+
+function getSelectedCareerIds() {
+  return Array.from(
+    document.querySelectorAll('[name="result-careers"]:checked'),
+    (input) => input.value,
+  );
+}
+
+function getCurrentScopedMatches(matches) {
+  const scope = document.querySelector("#results-scope").value;
+  const includedMatches = getScopedMatches(
+    matches,
+    scope,
+    getSelectedCareerIds(),
+  );
+  if (includedMatches.length === 0) {
+    document.querySelector("#result-action-status").textContent =
+      "Select at least one recommended career to continue.";
+    return null;
+  }
+  return { scope, matches: includedMatches };
+}
+
+function renderResultTools(matches) {
+  const tools = document.querySelector("#result-tools");
+  const selectionList = document.querySelector("#career-scope-list");
+  const selectionFieldset = document.querySelector("#career-scope-options");
+  const scopeSelect = document.querySelector("#results-scope");
+  const status = document.querySelector("#result-action-status");
+
+  tools.hidden = matches.length === 0;
+  status.textContent = "";
+  if (matches.length === 0) {
+    selectionList.replaceChildren();
+    return;
+  }
+
+  selectionList.replaceChildren(
+    ...matches.map(({ career }) => {
+      const label = document.createElement("label");
+      label.className = "career-scope-option";
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.name = "result-careers";
+      input.value = career.id;
+      input.checked = true;
+      const text = document.createElement("span");
+      text.textContent = career.title;
+      label.append(input, text);
+      return label;
+    }),
+  );
+  scopeSelect.value = "complete";
+  selectionFieldset.hidden = true;
+}
+
+function updateResultScopeOptions() {
+  const scope = document.querySelector("#results-scope").value;
+  document.querySelector("#career-scope-options").hidden =
+    scope !== "selected";
+  document.querySelector("#result-action-status").textContent = "";
+}
+
+function printScopedResults(saveAsPdf) {
+  const selection = getCurrentScopedMatches(lastMatches);
+  if (!selection) {
+    return;
+  }
+  printSelection(selection, saveAsPdf);
+}
+
+function printCareerDetails(careerId) {
+  const matches = getScopedMatches(lastMatches, "selected", [careerId]);
+  if (matches.length === 0) {
+    document.querySelector("#result-action-status").textContent =
+      "That career is no longer in your current results. Review your recommendations and try again.";
+    return;
+  }
+  printSelection({ scope: "selected", matches }, true);
+}
+
+function printSelection(selection, saveAsPdf) {
+  if (typeof window.print !== "function") {
+    document.querySelector("#result-action-status").textContent =
+      "Printing is not available in this browser. You can still review your results on this page.";
+    return;
+  }
+
+  const selectedIds = new Set(
+    selection.matches.map(({ career }) => career.id),
+  );
+  const cards = Array.from(
+    document.querySelectorAll("#recommendation-list > .recommendation-card"),
+  );
+  const originalDetails = new Map();
+  for (const card of cards) {
+    card.dataset.printSelected = String(selectedIds.has(card.dataset.careerId));
+    for (const details of card.querySelectorAll("details")) {
+      originalDetails.set(details, details.open);
+      details.open = true;
+    }
+  }
+
+  const restoreScreen = () => {
+    document.body.classList.remove("printing-results");
+    delete document.body.dataset.printScope;
+    for (const card of cards) {
+      delete card.dataset.printSelected;
+    }
+    for (const [details, wasOpen] of originalDetails) {
+      details.open = wasOpen;
+    }
+    window.removeEventListener("afterprint", restoreScreen);
+  };
+  window.addEventListener("afterprint", restoreScreen, { once: true });
+  document.body.classList.add("printing-results");
+  document.body.dataset.printScope = selection.scope;
+  document.querySelector("#result-action-status").textContent = saveAsPdf
+    ? "Choose “Save as PDF” to save a copy, or select a printer to print."
+    : "Choose a printer or print option in your browser's dialog.";
+  window.print();
+}
+
+async function shareScopedResults() {
+  const selection = getCurrentScopedMatches(lastMatches);
+  if (!selection) {
+    return;
+  }
+
+  const text = buildShareText(
+    selection.matches,
+    lastAnswersByGroup,
+    "complete",
+    selection.matches.map(({ career }) => career.id),
+  );
+  const status = document.querySelector("#result-action-status");
+  if (typeof navigator.share === "function") {
+    try {
+      await navigator.share({
+        title: "Career Pathway Explorer results",
+        text,
+      });
+      status.textContent = "Your results were shared.";
+      return;
+    } catch (error) {
+      if (error?.name === "AbortError") {
+        status.textContent = "Sharing was canceled. Your results remain on this page.";
+        return;
+      }
+      if (typeof navigator.clipboard?.writeText !== "function") {
+        status.textContent =
+          "Sharing could not be completed. You can save a PDF and attach it in the app you use.";
+        return;
+      }
+    }
+  }
+
+  if (typeof navigator.clipboard?.writeText !== "function") {
+    status.textContent =
+      "Sharing is not available in this browser. You can save a PDF and attach it in the app you use.";
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(text);
+    status.textContent =
+      "Your results were copied to the clipboard. Paste them where you want to share.";
+  } catch {
+    status.textContent =
+      "Your results could not be copied. You can save a PDF and attach it in the app you use.";
+  }
+}
+
+let lastMatches = [];
+let lastAnswersByGroup = {};
+
 function renderRecommendations(form, matches) {
+  lastMatches = matches;
+  lastAnswersByGroup = getAnswersByGroup(form);
   const recommendationList = document.querySelector("#recommendation-list");
   if (matches.length === 0) {
     const emptyState = document.createElement("li");
     emptyState.className = "recommendation-card";
     const heading = document.createElement("h3");
-    heading.textContent = "No clear skill connection yet";
+    heading.textContent = "No career matches yet";
     const message = document.createElement("p");
     message.textContent =
-      "Your current answers did not give us enough occupation or activity evidence to suggest a career responsibly. You can change your answers and select a work background or an activity you have done, if any apply. If none fit, we will not guess at a personalized recommendation.";
+      "Your answers didn't show enough overlap with the careers in our guide to suggest a match. Choose “Change my answers” to review your work backgrounds and activities, then try again. If none fit, that's okay—we won't guess at a match.";
     emptyState.append(heading, message);
     recommendationList.replaceChildren(emptyState);
   } else {
@@ -779,6 +1206,7 @@ function renderRecommendations(form, matches) {
     );
   }
 
+  renderResultTools(matches);
   document.querySelector("#recommendations").hidden = false;
   document.querySelector("#intake-form").hidden = true;
   document.querySelector("#recommendations-title").focus();
@@ -949,6 +1377,8 @@ if (typeof document !== "undefined") {
     });
     document.querySelector("#start-over").addEventListener("click", () => {
       intakeForm.reset();
+      lastMatches = [];
+      lastAnswersByGroup = {};
       document.querySelector("#recommendation-list").replaceChildren();
       document.querySelector("#recommendations").hidden = true;
       intakeForm.hidden = false;
@@ -956,15 +1386,31 @@ if (typeof document !== "undefined") {
       updateQuestionStep(intakeForm, currentStep, true);
       showMessage("", "");
     });
+    document
+      .querySelector("#results-scope")
+      .addEventListener("change", updateResultScopeOptions);
+    document
+      .querySelector("#print-results")
+      .addEventListener("click", () => printScopedResults(false));
+    document
+      .querySelector("#save-pdf")
+      .addEventListener("click", () => printScopedResults(true));
+    document
+      .querySelector("#share-results")
+      .addEventListener("click", shareScopedResults);
   }
 }
 
 if (typeof module !== "undefined") {
   module.exports = {
     getCareerMatches,
+    getPreparationResources,
     getMatchExplanation,
     getPreferenceExplanation,
     getPreparationNotes,
+    getScopedMatches,
+    getTransferableSkillConnections,
+    buildShareText,
     getUnansweredQuestions,
     questionGroups,
     questionSteps,

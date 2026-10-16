@@ -19,6 +19,19 @@ const careerRecords = [
     technologyNeeds: ["email", "documents", "spreadsheets", "calendar"],
     preparationNote:
       "Employers commonly look for everyday office-software skills; practice with documents, calendars, and spreadsheets can help you compare your experience with local postings.",
+    highSchoolEquivalentCommon: true,
+    preparationTask: {
+      family: "organization",
+      text: "Try a short practice task: update a sample calendar, format a one-page document, and save it with a clear file name.",
+    },
+    connectionUses: {
+      information: "organizing calendars, files, and routine documents",
+      coordination: "scheduling meetings and keeping a team informed",
+      communication: "responding to calls and routing questions",
+      procedures: "following office routines and tracking supplies",
+      accuracy: "checking details in forms and correspondence",
+      systems: "learning email, calendar, and document tools",
+    },
     description:
       "Administrative assistants help an office or team stay organized. The exact mix of work depends on the organization and the people they support.",
     responsibilities: [
@@ -75,18 +88,18 @@ const careerRecords = [
     ],
     resources: [
       {
-        name: "LearnFree: Word Foundations",
-        url: "https://www.learnfree.org/series/word-foundations",
+        name: "Microsoft Support: Word help and learning",
+        url: "https://support.microsoft.com/en-us/word",
         detail:
-          "Free, self-paced lessons for creating and formatting workplace documents.",
-        cost: "Free; no certificate is needed for the lessons.",
+          "Free help and learning materials for creating and formatting workplace documents.",
+        cost: "Free online learning materials; software access may vary.",
       },
       {
-        name: "LearnFree: Excel Foundations",
-        url: "https://www.learnfree.org/series/excel-foundations",
+        name: "Microsoft Support: Excel help and learning",
+        url: "https://support.microsoft.com/en-us/excel",
         detail:
           "Free lessons for organizing information in spreadsheets and using basic formulas.",
-        cost: "Free; optional practice, not an employment requirement.",
+        cost: "Free online learning materials; software access may vary.",
       },
     ],
     sources: [
@@ -125,6 +138,19 @@ const careerRecords = [
     technologyNeeds: ["email", "calendar", "online-records"],
     preparationNote:
       "Practice concise phone messages, email, and calendar tasks. Some reception jobs involve standing, frequent interruptions, or busy public-facing service.",
+    highSchoolEquivalentCommon: true,
+    preparationTask: {
+      family: "communication",
+      text: "Practice taking a clear phone message and scheduling a sample appointment in a calendar.",
+    },
+    connectionUses: {
+      information: "maintaining visitor logs and accurate messages",
+      coordination: "scheduling appointments and directing visitors",
+      communication: "welcoming callers and answering routine questions",
+      procedures: "following check-in routines and reporting delivery issues",
+      accuracy: "recording appointment and message details",
+      systems: "learning phone, calendar, and visitor-management tools",
+    },
     description:
       "Receptionists are often the first contact for visitors and callers. They welcome people, find out what they need, and connect them with the right person or service.",
     responsibilities: [
@@ -184,11 +210,11 @@ const careerRecords = [
         cost: "Free; a Microsoft account is optional for tracking progress.",
       },
       {
-        name: "LearnFree: Word Foundations",
-        url: "https://www.learnfree.org/series/word-foundations",
+        name: "Microsoft Support: Word help and learning",
+        url: "https://support.microsoft.com/en-us/word",
         detail:
-          "Free practice for basic documents and written messages.",
-        cost: "Free; optional skill-building.",
+          "Free help and learning materials for creating documents and written messages.",
+        cost: "Free online learning materials; software access may vary.",
       },
     ],
     sources: [
@@ -227,6 +253,19 @@ const careerRecords = [
     technologyNeeds: ["email", "online-records", "documents"],
     preparationNote:
       "Customer-service roles vary: some are in person, while others use phones, email, chat, or customer databases. Employers generally train workers on their own products and systems.",
+    highSchoolEquivalentCommon: true,
+    preparationTask: {
+      family: "customer-service",
+      text: "Practice writing a brief response that answers a customer question and records the next step.",
+    },
+    connectionUses: {
+      information: "recording customer interactions and service requests",
+      coordination: "sharing updates with coworkers about unresolved cases",
+      communication: "responding to questions and explaining next steps",
+      procedures: "using approved guidance and referring complex issues",
+      accuracy: "checking order and account details",
+      systems: "learning support platforms and customer records",
+    },
     description:
       "Customer service representatives answer questions about an organization’s products or services. They may resolve routine concerns, record interactions, or refer more complex issues to another team.",
     responsibilities: [
@@ -290,11 +329,11 @@ const careerRecords = [
         cost: "Free; a free HubSpot Academy account may be needed to enroll or track progress.",
       },
       {
-        name: "LearnFree: Word Foundations",
-        url: "https://www.learnfree.org/series/word-foundations",
+        name: "Microsoft Support: Word help and learning",
+        url: "https://support.microsoft.com/en-us/word",
         detail:
-          "Free practice for writing clear customer messages and maintaining simple documents.",
-        cost: "Free; optional skill-building.",
+          "Free help and learning materials for writing clear customer messages and maintaining simple documents.",
+        cost: "Free online learning materials; software access may vary.",
       },
     ],
     sources: [
@@ -331,6 +370,19 @@ const careerRecords = [
     technologyNeeds: ["email", "calendar", "online-records", "documents"],
     preparationNote:
       "Medical terminology, privacy procedures, and clinic-specific systems may require additional learning. Requirements vary by employer; administrative work does not authorize clinical duties.",
+    highSchoolEquivalentCommon: true,
+    preparationTask: {
+      family: "scheduling",
+      text: "Use fictional information to practice scheduling an appointment and organizing a simple office form; never use real patient details.",
+    },
+    connectionUses: {
+      information: "organizing forms and administrative patient records",
+      coordination: "scheduling visits and coordinating with clinic staff",
+      communication: "routing routine questions respectfully",
+      procedures: "following privacy procedures and clinic instructions",
+      accuracy: "checking appointment and form details",
+      systems: "learning clinic systems and online patient records",
+    },
     description:
       "Medical administrative assistants support the clerical work of a clinic, hospital, or other healthcare office. They may schedule visits, communicate routine information, and maintain patient records.",
     responsibilities: [
@@ -394,11 +446,11 @@ const careerRecords = [
         cost: "Free course materials; the free version does not issue a completion certificate.",
       },
       {
-        name: "LearnFree: Excel Foundations",
-        url: "https://www.learnfree.org/series/excel-foundations",
+        name: "Microsoft Support: Excel help and learning",
+        url: "https://support.microsoft.com/en-us/excel",
         detail:
-          "Free practice for organizing and checking information in spreadsheets.",
-        cost: "Free; optional skill-building, not a medical-office requirement.",
+          "Free help and learning materials for organizing and checking information in spreadsheets.",
+        cost: "Free online learning materials; software access may vary.",
       },
     ],
     sources: [
@@ -437,6 +489,19 @@ const careerRecords = [
     technologyNeeds: ["documents", "spreadsheets", "online-records"],
     preparationNote:
       "Practice consistent file naming, document retrieval, careful data entry, and spreadsheet basics. Specialized medical or government records roles may have additional rules or requirements.",
+    highSchoolEquivalentCommon: true,
+    preparationTask: {
+      family: "document-management",
+      text: "Practice naming and sorting sample files, then find one using a consistent folder structure.",
+    },
+    connectionUses: {
+      information: "classifying, filing, tracking, and retrieving documents",
+      coordination: "responding to authorized record requests and sharing status",
+      communication: "explaining routine retrieval updates clearly",
+      procedures: "following access and filing procedures",
+      accuracy: "checking labels, dates, and record entries",
+      systems: "learning electronic document and records tools",
+    },
     description:
       "Records clerks organize and retrieve paper or electronic documents so information can be found when authorized staff need it. The systems and rules depend on the organization.",
     responsibilities: [
@@ -500,11 +565,11 @@ const careerRecords = [
         cost: "Free; no professional certificate is required for general records clerk work.",
       },
       {
-        name: "LearnFree: Excel Foundations",
-        url: "https://www.learnfree.org/series/excel-foundations",
+        name: "Microsoft Support: Excel help and learning",
+        url: "https://support.microsoft.com/en-us/excel",
         detail:
-          "Free lessons for organizing and checking simple lists or indexes.",
-        cost: "Free; optional computer-skills practice.",
+          "Free help and learning materials for organizing and checking simple lists or indexes.",
+        cost: "Free online learning materials; software access may vary.",
       },
     ],
     sources: [
@@ -542,6 +607,19 @@ const careerRecords = [
     technologyNeeds: ["email", "documents", "spreadsheets", "online-records"],
     preparationNote:
       "General office clerk duties differ by employer and may combine filing, data entry, phones, mail, and customer service. Basic computer practice and attention to detail can support preparation.",
+    highSchoolEquivalentCommon: true,
+    preparationTask: {
+      family: "recordkeeping",
+      text: "Practice entering a small set of fictional information, checking it for errors, and saving the file with a clear name.",
+    },
+    connectionUses: {
+      information: "updating records and organizing documents",
+      coordination: "supporting scheduling and daily office workflows",
+      communication: "routing calls and answering routine questions",
+      procedures: "following office steps and tracking materials",
+      accuracy: "checking forms and data entries",
+      systems: "learning the office's file and database tools",
+    },
     description:
       "General office clerks perform routine clerical tasks that help an organization keep information, documents, and daily office work organized. The task mix depends on the employer.",
     responsibilities: [
@@ -590,16 +668,16 @@ const careerRecords = [
     careerPathway: ["General Office Clerk", "Administrative Assistant", "Office Coordinator"],
     resources: [
       {
-        name: "LearnFree: Word Foundations",
-        url: "https://www.learnfree.org/series/word-foundations",
+        name: "Microsoft Support: Word help and learning",
+        url: "https://support.microsoft.com/en-us/word",
         detail: "Free, self-paced practice for creating and formatting workplace documents.",
-        cost: "Free; optional practice, not an employment requirement.",
+        cost: "Free online learning materials; software access may vary.",
       },
       {
-        name: "LearnFree: Excel Foundations",
-        url: "https://www.learnfree.org/series/excel-foundations",
+        name: "Microsoft Support: Excel help and learning",
+        url: "https://support.microsoft.com/en-us/excel",
         detail: "Free lessons for organizing information in spreadsheets and using basic formulas.",
-        cost: "Free; optional skill-building.",
+        cost: "Free online learning materials; software access may vary.",
       },
     ],
     sources: [
@@ -631,6 +709,19 @@ const careerRecords = [
     technologyNeeds: ["spreadsheets", "online-records", "email", "documents"],
     preparationNote:
       "These roles rely on careful number and record checking and may use billing or accounting software. Employers may request prior data-entry or billing experience; requirements vary.",
+    highSchoolEquivalentCommon: true,
+    preparationTask: {
+      family: "transaction-accuracy",
+      text: "Use a fictional invoice list to practice comparing amounts and checking totals against the original entries.",
+    },
+    connectionUses: {
+      information: "maintaining billing records and supporting documents",
+      coordination: "following up on missing information and routine questions",
+      communication: "responding to billing inquiries clearly",
+      procedures: "following billing policies and processing steps",
+      accuracy: "checking invoices, payments, and totals",
+      systems: "learning billing software and spreadsheets",
+    },
     description:
       "Billing and posting clerks prepare bills, record payments, or update account information. Accuracy and following an employer’s procedures are important, and the exact duties vary by industry.",
     responsibilities: [
@@ -679,16 +770,16 @@ const careerRecords = [
     careerPathway: ["Billing and Posting Clerk", "Accounting Clerk", "Bookkeeping Clerk"],
     resources: [
       {
-        name: "LearnFree: Excel Foundations",
-        url: "https://www.learnfree.org/series/excel-foundations",
+        name: "Microsoft Support: Excel help and learning",
+        url: "https://support.microsoft.com/en-us/excel",
         detail: "Free practice for entering, checking, and organizing numerical information.",
-        cost: "Free; optional learning, not a billing credential.",
+        cost: "Free online learning materials; software access may vary.",
       },
       {
-        name: "LearnFree: Word Foundations",
-        url: "https://www.learnfree.org/series/word-foundations",
+        name: "Microsoft Support: Word help and learning",
+        url: "https://support.microsoft.com/en-us/word",
         detail: "Free practice for working with routine documents and written information.",
-        cost: "Free; optional skill-building.",
+        cost: "Free online learning materials; software access may vary.",
       },
     ],
     sources: [
@@ -720,6 +811,19 @@ const careerRecords = [
     technologyNeeds: ["online-records", "email", "documents"],
     preparationNote:
       "Program rules, privacy practices, and case-management systems are specific to the agency and usually require substantial employer training. Some roles involve interviewing the public and handling sensitive information.",
+    highSchoolEquivalentCommon: false,
+    preparationTask: {
+      family: "communication",
+      text: "Practice reviewing a fictional form for missing fields and explaining the next step without guessing at program rules.",
+    },
+    connectionUses: {
+      information: "reviewing application forms and documenting answers",
+      coordination: "following up on missing documents and referrals",
+      communication: "interviewing applicants and explaining agency-approved steps",
+      procedures: "following program rules and privacy practices",
+      accuracy: "checking fields and supporting documents",
+      systems: "learning agency case-management tools",
+    },
     description:
       "Eligibility interviewers gather information and help determine whether applicants meet requirements for government assistance programs. Program rules and duties vary by agency.",
     responsibilities: [
@@ -774,10 +878,10 @@ const careerRecords = [
         cost: "Free; optional technology practice.",
       },
       {
-        name: "LearnFree: Word Foundations",
-        url: "https://www.learnfree.org/series/word-foundations",
+        name: "Microsoft Support: Word help and learning",
+        url: "https://support.microsoft.com/en-us/word",
         detail: "Free practice for routine documents and written communication.",
-        cost: "Free; optional skill-building.",
+        cost: "Free online learning materials; software access may vary.",
       },
     ],
     sources: [
@@ -810,6 +914,19 @@ const careerRecords = [
     technologyNeeds: ["spreadsheets", "online-records", "email"],
     preparationNote:
       "These jobs may use spreadsheets or production-planning systems and may be located near manufacturing operations. Some workplaces include noise, time pressure, or floor visits, so check the setting and physical duties in each posting.",
+    highSchoolEquivalentCommon: true,
+    preparationTask: {
+      family: "inventory-tracking",
+      text: "Track the status of a fictional order list and practice noting a shortage or schedule change clearly.",
+    },
+    connectionUses: {
+      information: "updating work orders and production records",
+      coordination: "sharing schedule and material updates with teams",
+      communication: "reporting delays and confirming next steps",
+      procedures: "following work-order processes and tracking materials",
+      accuracy: "checking order, inventory, and status details",
+      systems: "learning production-planning and inventory software",
+    },
     description:
       "Production, planning, and expediting clerks coordinate materials and work schedules so production activities can proceed. The work is tied to the needs and systems of a particular operation.",
     responsibilities: [
@@ -858,10 +975,10 @@ const careerRecords = [
     careerPathway: ["Production Clerk", "Production Planner", "Production Coordinator"],
     resources: [
       {
-        name: "LearnFree: Excel Foundations",
-        url: "https://www.learnfree.org/series/excel-foundations",
+        name: "Microsoft Support: Excel help and learning",
+        url: "https://support.microsoft.com/en-us/excel",
         detail: "Free practice organizing lists and tracking status in spreadsheets.",
-        cost: "Free; optional practice, not an employer-specific system credential.",
+        cost: "Free online learning materials; software access may vary.",
       },
       {
         name: "Microsoft Learn: Excel training",
@@ -905,10 +1022,116 @@ const careerMatchingData = {
     "transaction-accuracy": "transaction and payment accuracy",
     "written-communication": "written communication",
   },
+  connectionGroups: {
+    information: {
+      label: "Organization and recordkeeping",
+      families: ["organization", "recordkeeping", "document-management"],
+    },
+    coordination: {
+      label: "Teamwork and coordination",
+      families: ["teamwork", "coordination", "scheduling"],
+    },
+    communication: {
+      label: "Communication and service",
+      families: [
+        "communication",
+        "customer-service",
+        "problem-solving",
+        "written-communication",
+      ],
+    },
+    procedures: {
+      label: "Procedures and supply tracking",
+      families: [
+        "procedure-following",
+        "instruction-following",
+        "quality-checking",
+        "observation-reporting",
+        "inventory-tracking",
+      ],
+    },
+    accuracy: {
+      label: "Accuracy and working with numbers",
+      families: ["accuracy", "transaction-accuracy", "numeracy"],
+    },
+    systems: {
+      label: "Learning workplace systems",
+      families: ["digital-systems"],
+    },
+  },
+  preparationResources: {
+    ged: [
+      {
+        name: "USAHello Classroom: Free GED preparation",
+        url: "https://classroom.usahello.org/ged/",
+        detail:
+          "Free self-paced GED preparation lessons. Check local testing and credential requirements before enrolling.",
+        cost: "Free learning materials; GED testing fees and rules can vary.",
+      },
+    ],
+    english: [
+      {
+        name: "USA Learns: Free English courses",
+        url: "https://www.usalearns.org/",
+        detail:
+          "Free online English courses for adult learners, including beginner and intermediate study.",
+        cost: "Free; optional learning resource.",
+      },
+      {
+        name: "USAHello: Tips for better English conversation",
+        url: "https://usahello.org/education/learn-english-language/english-conversation-tips/",
+        detail:
+          "Practical ideas for practicing everyday English conversation.",
+        cost: "Free; optional learning resource.",
+      },
+    ],
+    computer: {
+      documents: {
+        name: "Microsoft Support: Word help and learning",
+        url: "https://support.microsoft.com/en-us/word",
+        detail:
+          "Free help articles, tutorials, and training for creating and editing documents.",
+        cost: "Free online learning materials; software access may vary.",
+      },
+      spreadsheets: {
+        name: "Microsoft Support: Excel help and learning",
+        url: "https://support.microsoft.com/en-us/excel",
+        detail:
+          "Free help articles, tutorials, and training for organizing information in spreadsheets.",
+        cost: "Free online learning materials; software access may vary.",
+      },
+      email: {
+        name: "Microsoft Support: Outlook help and learning",
+        url: "https://support.microsoft.com/en-us/outlook",
+        detail:
+          "Free help articles and tutorials for email and calendar tasks.",
+        cost: "Free online learning materials; software access may vary.",
+      },
+      calendar: {
+        name: "Microsoft Support: Outlook help and learning",
+        url: "https://support.microsoft.com/en-us/outlook",
+        detail:
+          "Free help articles and tutorials for email and calendar tasks.",
+        cost: "Free online learning materials; software access may vary.",
+      },
+      "online-records": {
+        name: "Microsoft Support: Excel help and learning",
+        url: "https://support.microsoft.com/en-us/excel",
+        detail:
+          "Free help articles and tutorials for entering, organizing, and checking information.",
+        cost: "Free online learning materials; software access may vary.",
+      },
+    },
+  },
   occupations: {
     janitorial: {
       label: "Janitorial or custodial cleaning",
       taskBasis: "Typical tasks can include following procedures, tracking supplies, monitoring safety, and reporting maintenance issues.",
+      connectionText: "following procedures and checking supplies",
+      connectionTexts: {
+        information: "organizing supplies for routine tasks",
+        procedures: "following cleaning procedures and tracking needed supplies",
+      },
       skills: ["procedure-following", "inventory-tracking", "organization", "observation-reporting"],
       sources: [
         {
@@ -920,6 +1143,11 @@ const careerMatchingData = {
     housekeeping: {
       label: "Housekeeping or room cleaning",
       taskBasis: "Typical tasks can include restocking supplies, following cleanliness standards, organizing materials, and reporting damage or shortages.",
+      connectionText: "restocking supplies and reporting shortages",
+      connectionTexts: {
+        information: "organizing room supplies and materials",
+        procedures: "restocking supplies and following cleanliness procedures",
+      },
       skills: ["inventory-tracking", "procedure-following", "organization", "observation-reporting", "quality-checking"],
       sources: [
         {
@@ -931,6 +1159,13 @@ const careerMatchingData = {
     manufacturing: {
       label: "Manufacturing, assembly, or production",
       taskBasis: "Some roles use work orders, check product quality, coordinate with coworkers, and complete production records.",
+      connectionText: "following work instructions and checking completed work",
+      connectionTexts: {
+        information: "completing production records",
+        coordination: "coordinating tasks with coworkers",
+        communication: "solving routine work problems with a team",
+        procedures: "checking completed work against instructions",
+      },
       skills: ["instruction-following", "quality-checking", "recordkeeping", "teamwork", "problem-solving", "coordination"],
       sources: [
         {
@@ -942,6 +1177,12 @@ const careerMatchingData = {
     construction: {
       label: "Construction labor",
       taskBasis: "Typical tasks can involve following instructions, coordinating materials or work sequences, communicating with a crew, and reporting safety issues.",
+      connectionText: "following job instructions and coordinating work with a crew",
+      connectionTexts: {
+        coordination: "coordinating materials or work sequences with a crew",
+        communication: "communicating with a crew and reporting safety issues",
+        procedures: "following job instructions and work procedures",
+      },
       skills: ["instruction-following", "coordination", "teamwork", "observation-reporting", "problem-solving"],
       sources: [
         {
@@ -953,6 +1194,13 @@ const careerMatchingData = {
     warehouse: {
       label: "Warehouse, stock, or material handling",
       taskBasis: "Some roles use work orders, label items, count quantities, maintain inventory information, and report discrepancies.",
+      connectionText: "counting items and reporting shortages",
+      connectionTexts: {
+        information: "maintaining inventory information",
+        coordination: "coordinating orders or material movement",
+        procedures: "counting items and reporting shortages",
+        accuracy: "checking labels and quantities",
+      },
       skills: ["inventory-tracking", "accuracy", "procedure-following", "coordination", "observation-reporting", "recordkeeping"],
       sources: [
         {
@@ -968,6 +1216,12 @@ const careerMatchingData = {
     retail: {
       label: "Retail sales",
       taskBasis: "Typical tasks can include answering customer questions, processing sales or returns, and maintaining sales or inventory information.",
+      connectionText: "answering customer questions and handling sales or stock information",
+      connectionTexts: {
+        communication: "answering customer questions and resolving routine concerns",
+        procedures: "tracking stock or inventory",
+        accuracy: "processing sales or returns accurately",
+      },
       skills: ["customer-service", "communication", "problem-solving", "transaction-accuracy", "inventory-tracking"],
       sources: [
         {
@@ -979,6 +1233,11 @@ const careerMatchingData = {
     cashier: {
       label: "Cashier or payment handling",
       taskBasis: "Typical tasks can include receiving payments, issuing receipts, recording totals, and answering customer questions.",
+      connectionText: "handling payments, issuing receipts, and recording totals",
+      connectionTexts: {
+        communication: "answering customer questions",
+        accuracy: "handling payments and recording totals",
+      },
       skills: ["customer-service", "transaction-accuracy", "accuracy", "communication", "problem-solving", "numeracy"],
       sources: [
         {
@@ -990,6 +1249,13 @@ const careerMatchingData = {
     "food-service": {
       label: "Food preparation or food service",
       taskBasis: "Tasks vary by role and can include following food-safety procedures, checking supplies, serving customers, and coordinating during busy periods.",
+      connectionText: "coordinating with coworkers and following service procedures",
+      connectionTexts: {
+        information: "keeping routine supply or service records",
+        coordination: "coordinating tasks with coworkers during busy periods",
+        communication: "serving customers and answering routine questions",
+        procedures: "following food-safety procedures and checking supplies",
+      },
       skills: ["procedure-following", "inventory-tracking", "teamwork", "customer-service", "quality-checking", "recordkeeping", "coordination", "communication"],
       sources: [
         {
@@ -1005,6 +1271,12 @@ const careerMatchingData = {
     agriculture: {
       label: "Farm, crop, or greenhouse work",
       taskBasis: "Some roles involve recording crop information, checking or sorting products, tracking supplies, and following work procedures.",
+      connectionText: "checking products and recording or tracking supplies",
+      connectionTexts: {
+        information: "recording crop information",
+        procedures: "checking products and tracking supplies",
+        accuracy: "checking product quality and details",
+      },
       skills: ["quality-checking", "recordkeeping", "inventory-tracking", "procedure-following", "observation-reporting", "accuracy"],
       sources: [
         {
@@ -1016,6 +1288,13 @@ const careerMatchingData = {
     caregiving: {
       label: "Home or personal care aide / caregiver",
       taskBasis: "Some caregiving roles include recording observations, communicating updates, coordinating routines, and following care instructions. This does not imply medical-administration expertise.",
+      connectionText: "coordinating routines and sharing updates with others",
+      connectionTexts: {
+        information: "recording routine observations",
+        coordination: "coordinating daily routines",
+        communication: "sharing updates with other people",
+        procedures: "following care instructions",
+      },
       skills: ["communication", "observation-reporting", "recordkeeping", "scheduling", "procedure-following", "problem-solving"],
       sources: [
         {
@@ -1031,6 +1310,13 @@ const careerMatchingData = {
     childcare: {
       label: "Childcare worker or provider",
       taskBasis: "Some childcare tasks include maintaining attendance information, communicating with families, coordinating routines, and completing records.",
+      connectionText: "coordinating routines and keeping attendance information",
+      connectionTexts: {
+        information: "keeping attendance information and routine records",
+        coordination: "coordinating daily routines",
+        communication: "communicating updates with families",
+        procedures: "following established care procedures",
+      },
       skills: ["communication", "observation-reporting", "recordkeeping", "scheduling", "procedure-following", "coordination", "customer-service"],
       sources: [
         {
@@ -1039,42 +1325,97 @@ const careerMatchingData = {
         },
       ],
     },
+    "family-care": {
+      label: "Stay-at-home parenting or unpaid family caregiving",
+      taskBasis:
+        "Family responsibilities differ. Some people who care for children or relatives at home may organize schedules, coordinate routines, share updates, or keep track of supplies and important details. These are possibilities to consider, not assumptions about any person. O*NET childcare and home-care profiles are reference points for related paid work, not proof of unpaid duties.",
+      connectionText:
+        "organizing family schedules, coordinating routines, and keeping track of household needs",
+      connectionTexts: {
+        information: "keeping track of family schedules, supplies, or important details",
+        coordination: "organizing family schedules or coordinating daily routines",
+        communication: "sharing updates with family members or other caregivers",
+      },
+      skills: [
+        "organization",
+        "recordkeeping",
+        "scheduling",
+        "coordination",
+        "communication",
+      ],
+      sources: [
+        {
+          name: "O*NET: Childcare Workers (39-9011.00), reference for related caregiving tasks",
+          url: "https://www.onetonline.org/link/summary/39-9011.00",
+        },
+        {
+          name: "O*NET: Home Health Aides (31-1121.00), reference for related caregiving tasks",
+          url: "https://www.onetonline.org/link/summary/31-1121.00",
+        },
+      ],
+    },
   },
   activities: {
     "calls-visitors": {
-      label: "Answered or routed calls, took messages, or greeted/directed visitors",
+      label:
+        "Welcomed or directed people, took a message, or passed a question to someone who could help",
+      connectionText:
+        "welcoming or directing people, taking messages, or passing questions to someone who could help",
       skills: ["communication", "customer-service", "coordination"],
     },
     "explain-resolve": {
-      label: "Answered questions, explained instructions or next steps, or helped resolve a problem",
+      label:
+        "Helped people with questions, explained what to do, or solved problems",
+      connectionText:
+        "helping people with questions, explaining what to do, or solving problems",
       skills: ["communication", "customer-service", "problem-solving"],
     },
     scheduling: {
-      label: "Scheduled or confirmed appointments, meetings, or deliveries",
+      label:
+        "Organized schedules, appointments, activities, or deliveries",
+      connectionText:
+        "organizing schedules, appointments, activities, or deliveries",
       skills: ["scheduling", "coordination", "accuracy"],
     },
     "enter-check-records": {
-      label: "Entered or checked information in forms or records",
+      label:
+        "Filled out forms, checked information, or kept track of important details",
+      connectionText:
+        "filling out forms, checking information, or keeping track of important details",
       skills: ["recordkeeping", "accuracy", "digital-systems"],
     },
     "organize-documents": {
-      label: "Filed, scanned, organized, or retrieved documents or records",
+      label:
+        "Sorted, put away, or found papers, forms, or records when needed",
+      connectionText:
+        "sorting, putting away, or finding papers, forms, or records",
       skills: ["document-management", "organization", "accuracy", "recordkeeping"],
     },
     "prepare-documents": {
-      label: "Prepared or edited emails, letters, forms, or reports",
+      label: "Wrote or updated notes, messages, instructions, or reports",
+      connectionText:
+        "writing or updating notes, messages, instructions, or reports",
       skills: ["written-communication", "document-management", "accuracy"],
     },
     "team-coordination": {
-      label: "Shared updates with coworkers or coordinated tasks with a team",
+      label:
+        "Worked with others to organize tasks, share updates, or get things done",
+      connectionText:
+        "working with others to organize tasks, share updates, or get things done",
       skills: ["communication", "teamwork", "coordination"],
     },
     "track-supplies": {
-      label: "Tracked or counted supplies, products, or inventory, and reported low or missing items",
+      label:
+        "Kept track of supplies, products, or things that needed replacing",
+      connectionText:
+        "keeping track of supplies, products, or things that needed replacing",
       skills: ["inventory-tracking", "accuracy", "coordination", "recordkeeping", "observation-reporting"],
     },
     payments: {
-      label: "Handled invoices, payments, or receipts, or checked totals",
+      label:
+        "Counted money, handled payments, or checked totals",
+      connectionText:
+        "counting money, handling payments, or checking totals",
       skills: ["transaction-accuracy", "numeracy", "recordkeeping", "accuracy"],
     },
   },
